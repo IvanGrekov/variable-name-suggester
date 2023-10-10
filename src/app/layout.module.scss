@@ -1,5 +1,11 @@
 @import 'styles/extends.scss';
 
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .header-spacing {
     @extend .header-spacing-extend;
 }

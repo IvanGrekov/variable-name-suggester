@@ -13,7 +13,7 @@ interface IContainerProps extends PropsWithChildren {
 
 export default function Container({
     element = 'div',
-    size = 'xl',
+    size = 'lg',
     className,
     children,
     style,

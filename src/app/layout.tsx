@@ -7,16 +7,22 @@ import { Inter } from 'next/font/google';
 
 import styles from 'app/layout.module.scss';
 import Providers from 'app/providers';
+import AppTabs from 'components/app-tabs/AppTabs';
+import AppTabsNav from 'components/app-tabs-nav/AppTabsNav';
+import Container from 'components/container/Container';
 import ErrorBoundary from 'components/error-boundary/ErrorBoundary';
 import Header from 'components/header/Header';
 import NetworkStatusIndicator from 'components/network-status-indicator/NetworkStatusIndicator';
 import Notifications from 'components/notifications/Notifications';
 import ScrollTopButton from 'components/scroll-top-button/ScrollTopButton';
+import Spacing from 'components/spacing/Spacing';
+import Typography from 'components/typography/Typography';
+import { EAppTitle } from 'types/appTitle.types';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Variable Name Suggester',
+    title: EAppTitle.MAIN,
     description: "Don't know how to call your variable? Let us help you!",
 };
 
@@ -30,16 +36,31 @@ export default function RootLayout({
             <body className={inter.className}>
                 <ErrorBoundary>
                     <Providers>
-                        <Header />
+                        <Header>
+                            <Typography element="h1" variant="subtitle1">
+                                {EAppTitle.MAIN}
+                            </Typography>
+                        </Header>
 
-                        <main
+                        <Container
+                            element="main"
                             className={cx(
                                 styles.main,
                                 styles['header-spacing'],
                             )}
                         >
+                            <Spacing xs={16} sm={24} md={32} />
+
+                            <AppTabsNav />
+
+                            <Spacing xs={16} />
+
+                            <AppTabs />
+
+                            <Spacing xs={16} sm={24} md={32} />
+
                             {children}
-                        </main>
+                        </Container>
 
                         <Notifications />
 

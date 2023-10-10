@@ -24,6 +24,7 @@ export default function Accordion({
             className={cx(styles.accordion, {
                 [styles['accordion--open']]: isOpen,
                 [styles['accordion--spaced']]: isSpaced,
+                [styles['accordion--not-spaced']]: !isSpaced,
             })}
         >
             <AccordionHeader

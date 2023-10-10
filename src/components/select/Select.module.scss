@@ -54,6 +54,10 @@ $arrow-button-gutter: $spacing-6;
     }
 }
 
+.label {
+    left: 1.25rem !important;
+}
+
 .select-wrapper {
     position: relative;
 
@@ -65,6 +69,10 @@ $arrow-button-gutter: $spacing-6;
                 fill: var(--red);
             }
         }
+    }
+
+    &--full-width {
+        width: 100%;
     }
 }
 
@@ -107,6 +115,10 @@ $arrow-button-gutter: $spacing-6;
 
     &--disabled {
         @extend .input-disabled-state-extend;
+    }
+
+    &--full-width {
+        width: 100%;
     }
 }
 

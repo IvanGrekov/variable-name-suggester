@@ -7,7 +7,7 @@
 
     --light: 218, 255, 251;
     --dark: 0, 28, 48;
-    --middle: 23, 107, 135;
+    --middle: 29, 133, 168;
 
     --gray: #aaaaaa;
     --gray-light: #e3e1e1;
@@ -82,11 +82,13 @@
 
 html {
     @extend .light-theme-variables-extend;
+
     color-scheme: light;
 }
 
 html.dark {
     @extend .dark-theme-variables-extend;
+
     color-scheme: dark;
 }
 

@@ -27,6 +27,7 @@ export default function Select<T>({
     multiple,
     shouldCloseOnChange = multiple ? false : true,
     shouldAddSearch,
+    isFullWidth,
     containerClassName,
     labelClassName,
     placeholderClassName,
@@ -78,6 +79,7 @@ export default function Select<T>({
             <InputContainer
                 error={error}
                 disabled={disabled}
+                isFullWidth={isFullWidth}
                 className={containerClassName}
                 errorClassName={errorClassName}
             >
@@ -91,11 +93,13 @@ export default function Select<T>({
                     <div
                         className={cx(styles['select-wrapper'], {
                             [styles['select-wrapper--error']]: error,
+                            [styles['select-wrapper--full-width']]: isFullWidth,
                         })}
                         onClick={onWrapperClick}
                     >
                         <TextFieldWrapper
                             disabled={disabled}
+                            isFullWidth={isFullWidth}
                             className={textFieldWrapperClassName}
                         >
                             <select
@@ -121,6 +125,7 @@ export default function Select<T>({
                                 isFieldFilled={isFieldFilled}
                                 isOptionsFixed={isOptionsFixed}
                                 multiple={multiple}
+                                isFullWidth={isFullWidth}
                                 error={error}
                                 disabled={disabled}
                                 className={className}

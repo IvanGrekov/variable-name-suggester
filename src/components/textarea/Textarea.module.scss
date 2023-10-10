@@ -3,6 +3,7 @@
 
 .textarea {
     @extend .text-field-extend;
+
     min-height: $input-height;
     padding-top: $spacing-3;
 
@@ -26,12 +27,20 @@
     &--not-resizing {
         resize: none;
     }
+
+    &--full-width {
+        width: 100%;
+    }
 }
 
 .label,
 .placeholder {
     top: $spacing-3;
     translate: 0;
+}
+
+.label {
+    transition-property: opacity, top, translate;
 }
 
 .label--focused {

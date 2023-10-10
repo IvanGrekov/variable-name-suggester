@@ -4,6 +4,7 @@ import { IErrorProps } from 'components/input-error/types';
 
 export type TBaseInputContainerProps = Pick<IErrorProps, 'error'> & {
     errorClassName?: IErrorProps['className'];
+    isFullWidth?: boolean;
 };
 
 export type TInputContainerProps = PropsWithChildren &

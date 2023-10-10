@@ -10,11 +10,21 @@ export const useInitIndicator: TUseInitIndicator = (
     setIndicatorLeftPosition,
 ) => {
     useEffect(() => {
-        const indicatorElementRect =
-            indicatorElementRef.current?.getBoundingClientRect();
+        const resizeHandler = (): void => {
+            const indicatorElementRect =
+                indicatorElementRef.current?.getBoundingClientRect();
 
-        if (indicatorElementRect) {
-            setIndicatorLeftPosition(indicatorElementRect.left);
-        }
+            if (indicatorElementRect) {
+                setIndicatorLeftPosition(indicatorElementRect.left);
+            }
+        };
+
+        resizeHandler();
+
+        window.addEventListener('resize', resizeHandler);
+
+        return () => {
+            window.removeEventListener('resize', resizeHandler);
+        };
     }, [indicatorElementRef, setIndicatorLeftPosition]);
 };

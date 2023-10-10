@@ -4,6 +4,7 @@ import { PropsWithChildren } from 'react';
 
 import cx from 'classnames';
 
+import Container from 'components/container/Container';
 import styles from 'components/header/Header.module.scss';
 import PageLoadingIndicator from 'components/page-loading-indicator/PageLoadingIndicator';
 import ThemeSwitcher from 'components/theme-switcher/ThemeSwitcher';
@@ -34,13 +35,13 @@ export default function Header({
         >
             <PageLoadingIndicator className={styles.loading} />
 
-            <div className={styles['content-wrapper']}>
+            <Container className={styles['content-wrapper']}>
                 <div className={styles.content}>
-                    <ThemeSwitcher tooltipPosition="left" />
-
                     {children}
+
+                    <ThemeSwitcher tooltipPosition="left" />
                 </div>
-            </div>
+            </Container>
         </header>
     );
 }

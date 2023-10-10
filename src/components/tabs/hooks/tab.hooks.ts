@@ -1,16 +1,17 @@
 import { useEffect, MutableRefObject } from 'react';
 
-import { usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 import { ITabProps } from 'components/tabs/types/tab';
-import { ITabsContextValue } from 'contexts/TabsContext';
+import { TAB_PARAM_NAME } from 'constants/tabs.constants';
+import { useTabsContext } from 'contexts/TabsContext';
+import { useGetStringifiedSearchParams } from 'hooks/searchParams.hooks';
+import { useCurrentTab } from 'hooks/tabs.hooks';
 
 type TTabElementRef = MutableRefObject<HTMLDivElement | null>;
 
 type TUseTabIndicatorConnectionProps = Pick<ITabProps, 'path'> & {
     tabElementRef: TTabElementRef;
-    indicatorElement?: ITabsContextValue['indicatorElement'];
-    initialIndicatorLeftPosition?: ITabsContextValue['initialIndicatorLeftPosition'];
 };
 
 type TUseTabIndicatorConnection = (
@@ -19,13 +20,14 @@ type TUseTabIndicatorConnection = (
 
 export const useTabIndicatorConnection: TUseTabIndicatorConnection = ({
     tabElementRef,
-    indicatorElement,
-    initialIndicatorLeftPosition,
     path,
 }) => {
-    const pathname = usePathname();
+    const tabsContext = useTabsContext();
+    const currentTab = useCurrentTab();
 
     useEffect(() => {
+        const { indicatorElement, initialIndicatorLeftPosition } =
+            tabsContext || {};
         const tabElementRect = tabElementRef.current?.getBoundingClientRect();
 
         if (
@@ -36,18 +38,21 @@ export const useTabIndicatorConnection: TUseTabIndicatorConnection = ({
             return;
         }
 
-        if (path === pathname) {
+        if (currentTab === '') {
+            console.log(
+                'initialIndicatorLeftPosition',
+                initialIndicatorLeftPosition,
+            );
+
+            console.log('tabElementRect.left', tabElementRect.left);
+        }
+
+        if (path === currentTab) {
             const newLeftPosition =
                 tabElementRect.left - initialIndicatorLeftPosition;
             indicatorElement.style.left = `${newLeftPosition}px`;
         }
-    }, [
-        tabElementRef,
-        indicatorElement,
-        initialIndicatorLeftPosition,
-        path,
-        pathname,
-    ]);
+    }, [tabsContext, tabElementRef, path, currentTab]);
 };
 
 type TUseTabListenerProps = Pick<ITabProps, 'path'> & {
@@ -56,6 +61,10 @@ type TUseTabListenerProps = Pick<ITabProps, 'path'> & {
 type TUseTabListener = (props: TUseTabListenerProps) => void;
 
 export const useTabListener: TUseTabListener = ({ tabElementRef, path }) => {
+    const router = useRouter();
+    const pathname = usePathname();
+    const getStringifiedSearchParams = useGetStringifiedSearchParams();
+
     useEffect(() => {
         const tabElement = tabElementRef.current;
 
@@ -64,7 +73,12 @@ export const useTabListener: TUseTabListener = ({ tabElementRef, path }) => {
         }
 
         const clickHandler = (): void => {
-            history.replaceState(null, '', '../${path}');
+            const params = getStringifiedSearchParams(TAB_PARAM_NAME, path);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            router.push(`${pathname}${params}`, undefined, {
+                shallow: true,
+            });
         };
 
         tabElement.addEventListener('click', clickHandler);
@@ -72,5 +86,5 @@ export const useTabListener: TUseTabListener = ({ tabElementRef, path }) => {
         return (): void => {
             tabElement.removeEventListener('click', clickHandler);
         };
-    }, [tabElementRef, path]);
+    }, [tabElementRef, pathname, path, router, getStringifiedSearchParams]);
 };

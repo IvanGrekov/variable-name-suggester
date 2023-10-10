@@ -1,13 +1,13 @@
 import Head from 'next/head';
 
+import { EAppTitle } from 'types/appTitle.types';
+
 export default function Home(): JSX.Element {
     return (
         <>
             <Head>
-                <title>Variable Name Suggester</title>
+                <title>{EAppTitle.MAIN}</title>
             </Head>
-
-            <h1>Variable Name Suggester</h1>
         </>
     );
 }

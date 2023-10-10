@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef } from 'react';
 
 import Button from 'components/button/Button';
@@ -7,16 +9,13 @@ import {
     useTabListener,
 } from 'components/tabs/hooks/tab.hooks';
 import { ITabProps } from 'components/tabs/types/tab';
-import { useTabsContext } from 'contexts/TabsContext';
 
 export default function Tab({ path, label }: ITabProps): JSX.Element | null {
-    const tabsContext = useTabsContext();
     const tabElementRef = useRef<HTMLDivElement | null>(null);
 
     useTabIndicatorConnection({
         tabElementRef,
         path,
-        ...(tabsContext || {}),
     });
 
     useTabListener({ tabElementRef, path });

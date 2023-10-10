@@ -9,6 +9,7 @@ export default function InputContainer({
     className,
     errorClassName,
     disabled,
+    isFullWidth,
     ...rest
 }: TInputContainerProps): JSX.Element {
     return (
@@ -17,6 +18,7 @@ export default function InputContainer({
                 styles.container,
                 {
                     [styles['container--disabled']]: disabled,
+                    [styles['container--full-width']]: isFullWidth,
                 },
                 className,
             )}

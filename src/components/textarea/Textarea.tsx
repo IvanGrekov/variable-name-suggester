@@ -17,6 +17,7 @@ export default function Textarea({
     shouldHidePlaceholder,
     rows = 5,
     disableResize,
+    isFullWidth,
     containerClassName,
     labelClassName,
     placeholderClassName,
@@ -49,11 +50,13 @@ export default function Textarea({
         <InputContainer
             error={error}
             disabled={disabled}
+            isFullWidth={isFullWidth}
             className={containerClassName}
             errorClassName={errorClassName}
         >
             <TextFieldWrapper
                 disabled={disabled}
+                isFullWidth={isFullWidth}
                 className={textFieldWrapperClassName}
             >
                 <textarea
@@ -70,6 +73,7 @@ export default function Textarea({
                             [styles['textarea--error']]: error,
                             [styles['textarea--filled']]: isTextareaFilled,
                             [styles['textarea--not-resizing']]: disableResize,
+                            [styles['textarea--full-width']]: isFullWidth,
                         },
                         className,
                     )}

@@ -1,18 +1,18 @@
 @import 'styles/variables.scss';
 
 .header-spacing-extend {
-    padding-top: $header-size;
+    padding-top: $header-size !important;
 
     @media (max-width: $screen-md) {
-        padding-top: $header-mobile-size;
+        padding-top: $header-mobile-size !important;
     }
 }
 
 .sidebar-layout-extend {
-    margin-left: $sidebar-size;
+    margin-left: $sidebar-size !important;
 
     @media (max-width: $screen-lg) {
-        margin-left: 0;
+        margin-left: 0 !important;
     }
 }
 
