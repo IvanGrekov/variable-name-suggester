@@ -38,15 +38,6 @@ export const useTabIndicatorConnection: TUseTabIndicatorConnection = ({
             return;
         }
 
-        if (currentTab === '') {
-            console.log(
-                'initialIndicatorLeftPosition',
-                initialIndicatorLeftPosition,
-            );
-
-            console.log('tabElementRect.left', tabElementRect.left);
-        }
-
         if (path === currentTab) {
             const newLeftPosition =
                 tabElementRect.left - initialIndicatorLeftPosition;

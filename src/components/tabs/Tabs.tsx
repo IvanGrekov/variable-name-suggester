@@ -11,16 +11,21 @@ import TabsContextProvider from 'contexts/TabsContext';
 
 interface ITabsProps {
     children: Array<ReactElement<typeof Tab>>;
+    isDelayed?: boolean;
 }
 
-export default function Tabs({ children }: ITabsProps): JSX.Element {
+export default function Tabs({ children, isDelayed }: ITabsProps): JSX.Element {
     const indicatorElementRef = useRef<HTMLDivElement | null>(null);
 
     const [indicatorLeftPosition, setIndicatorLeftPosition] = useState<
         null | number
     >(null);
 
-    useInitIndicator(indicatorElementRef, setIndicatorLeftPosition);
+    useInitIndicator({
+        isDelayed,
+        indicatorElementRef,
+        setIndicatorLeftPosition,
+    });
 
     const isIndicatorInitialized = indicatorLeftPosition !== null;
 

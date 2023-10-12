@@ -1,10 +1,10 @@
 'use client';
 
-import styles from 'components/app-tabs/AppTabs.module.scss';
-import HelpPage from 'components/help-page/HelpPage';
 import Paper from 'components/paper/Paper';
-import SuggesterPage from 'components/suggester-page/SuggesterPage';
-import { useIsHelpTab } from 'hooks/appTabs.hooks';
+import styles from 'features/app-tabs/AppTabs.module.scss';
+import { useIsHelpTab } from 'features/app-tabs/hooks';
+import HelpPage from 'features/help-page/HelpPage';
+import SuggesterPage from 'features/suggester-page/SuggesterPage';
 
 export default function AppTabs(): JSX.Element {
     const isHelpTab = useIsHelpTab();

@@ -1,8 +1,6 @@
 @import 'styles/extends.scss';
 
 .main {
-    display: flex;
-    flex-direction: column;
     height: 100vh;
 }
 
@@ -12,4 +10,99 @@
 
 .sidebar-layout {
     @extend .sidebar-layout-extend;
+}
+
+.animated-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    animation: animate-page 1.5s ease;
+}
+
+@keyframes animate-page {
+    0% {
+        background-color: var(--foreground);
+        transform: scale(0.1, 0.002);
+        opacity: 0;
+    }
+
+    70% {
+        background-color: var(--foreground);
+        transform: scale(1, 0.002);
+        opacity: 1;
+    }
+
+    71% {
+        background-color: transparent;
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-moz-keyframes animate-page {
+    0% {
+        background-color: var(--foreground);
+        transform: scale(0.1, 0.002);
+        opacity: 0;
+    }
+
+    70% {
+        background-color: var(--foreground);
+        transform: scale(1, 0.002);
+        opacity: 1;
+    }
+
+    71% {
+        background-color: transparent;
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-webkit-keyframes animate-page {
+    0% {
+        background-color: var(--foreground);
+        transform: scale(0.1, 0.002);
+        opacity: 0;
+    }
+
+    70% {
+        background-color: var(--foreground);
+        transform: scale(1, 0.002);
+        opacity: 1;
+    }
+
+    71% {
+        background-color: transparent;
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@-o-keyframes animate-page {
+    0% {
+        background-color: var(--foreground);
+        transform: scale(0.1, 0.002);
+        opacity: 0;
+    }
+
+    70% {
+        background-color: var(--foreground);
+        transform: scale(1, 0.002);
+        opacity: 1;
+    }
+
+    71% {
+        background-color: transparent;
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
 }

@@ -7,8 +7,6 @@ import { Inter } from 'next/font/google';
 
 import styles from 'app/layout.module.scss';
 import Providers from 'app/providers';
-import AppTabs from 'components/app-tabs/AppTabs';
-import AppTabsNav from 'components/app-tabs-nav/AppTabsNav';
 import Container from 'components/container/Container';
 import ErrorBoundary from 'components/error-boundary/ErrorBoundary';
 import Header from 'components/header/Header';
@@ -17,6 +15,8 @@ import Notifications from 'components/notifications/Notifications';
 import ScrollTopButton from 'components/scroll-top-button/ScrollTopButton';
 import Spacing from 'components/spacing/Spacing';
 import Typography from 'components/typography/Typography';
+import AppTabs from 'features/app-tabs/AppTabs';
+import AppTabsNav from 'features/app-tabs/AppTabsNav';
 import { EAppTitle } from 'types/appTitle.types';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -49,17 +49,19 @@ export default function RootLayout({
                                 styles['header-spacing'],
                             )}
                         >
-                            <Spacing xs={16} sm={24} md={32} />
+                            <div className={styles['animated-content']}>
+                                <Spacing xs={16} sm={24} md={32} />
 
-                            <AppTabsNav />
+                                <AppTabsNav />
 
-                            <Spacing xs={16} />
+                                <Spacing xs={16} />
 
-                            <AppTabs />
+                                <AppTabs />
 
-                            <Spacing xs={16} sm={24} md={32} />
+                                <Spacing xs={16} sm={24} md={32} />
 
-                            {children}
+                                {children}
+                            </div>
                         </Container>
 
                         <Notifications />
