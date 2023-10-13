@@ -1,5 +1,7 @@
 import { MutableRefObject, Dispatch, SetStateAction, useEffect } from 'react';
 
+import { BASE_ANIMATION_DURATION } from 'constants/animationDuration.constants';
+
 type TUseInitIndicator = (args: {
     isDelayed?: boolean;
     indicatorElementRef: MutableRefObject<HTMLDivElement | null>;
@@ -21,7 +23,8 @@ export const useInitIndicator: TUseInitIndicator = ({
             }
         };
 
-        const timeoutId = setTimeout(resizeHandler, isDelayed ? 1250 : 0);
+        const delay = isDelayed ? BASE_ANIMATION_DURATION * 0.85 : 0;
+        const timeoutId = setTimeout(resizeHandler, delay);
 
         window.addEventListener('resize', resizeHandler);
 

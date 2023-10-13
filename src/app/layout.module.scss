@@ -1,3 +1,4 @@
+@import 'styles/variables.scss';
 @import 'styles/extends.scss';
 
 .main {
@@ -13,96 +14,231 @@
 }
 
 .animated-content {
+    position: relative;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    animation: animate-page 1.5s ease;
+    animation: animated-page $base-animation-duration $base-animation-function;
+
+    & > * {
+        animation: animated-page-children $base-animation-duration
+            $base-animation-function;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        background-color: var(--foreground);
+        animation: animated-page-before $base-animation-duration
+            $base-animation-function forwards;
+    }
 }
 
-@keyframes animate-page {
+@keyframes animated-page {
     0% {
-        background-color: var(--foreground);
-        transform: scale(0.1, 0.002);
+        transform: scaleY(1);
+    }
+
+    70% {
+        transform: scaleY(1);
+    }
+
+    71% {
+        transform: scaleY(0.002);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes animated-page-children {
+    0% {
         opacity: 0;
     }
 
     70% {
-        background-color: var(--foreground);
-        transform: scale(1, 0.002);
-        opacity: 1;
+        opacity: 0;
     }
 
     71% {
-        background-color: transparent;
-    }
-
-    100% {
-        transform: scale(1, 1);
+        opacity: 1;
     }
 }
 
-@-moz-keyframes animate-page {
+@keyframes animated-page-before {
     0% {
-        background-color: var(--foreground);
-        transform: scale(0.1, 0.002);
+        height: 1px;
+        left: 50%;
+        right: 50%;
+    }
+
+    70% {
+        height: 1px;
+        left: 0;
+        right: 0;
+    }
+
+    71% {
+        height: 0;
+        left: 0;
+        right: 0;
+    }
+}
+
+@-moz-keyframes animated-page {
+    0% {
+        transform: scaleY(1);
+    }
+
+    70% {
+        transform: scaleY(1);
+    }
+
+    71% {
+        transform: scaleY(0.002);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@-moz-keyframes animated-page-children {
+    0% {
         opacity: 0;
     }
 
     70% {
-        background-color: var(--foreground);
-        transform: scale(1, 0.002);
-        opacity: 1;
+        opacity: 0;
     }
 
     71% {
-        background-color: transparent;
-    }
-
-    100% {
-        transform: scale(1, 1);
+        opacity: 1;
     }
 }
 
-@-webkit-keyframes animate-page {
+@-moz-keyframes animated-page-before {
     0% {
-        background-color: var(--foreground);
-        transform: scale(0.1, 0.002);
+        height: 1px;
+        left: 50%;
+        right: 50%;
+    }
+
+    70% {
+        height: 1px;
+        left: 0;
+        right: 0;
+    }
+
+    71% {
+        height: 0;
+        left: 0;
+        right: 0;
+    }
+}
+
+@-webkit-keyframes animated-page {
+    0% {
+        transform: scaleY(1);
+    }
+
+    70% {
+        transform: scaleY(1);
+    }
+
+    71% {
+        transform: scaleY(0.002);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@-webkit-keyframes animated-page-children {
+    0% {
         opacity: 0;
     }
 
     70% {
-        background-color: var(--foreground);
-        transform: scale(1, 0.002);
-        opacity: 1;
+        opacity: 0;
     }
 
     71% {
-        background-color: transparent;
-    }
-
-    100% {
-        transform: scale(1, 1);
+        opacity: 1;
     }
 }
 
-@-o-keyframes animate-page {
+@-webkit-keyframes animated-page-before {
     0% {
-        background-color: var(--foreground);
-        transform: scale(0.1, 0.002);
+        height: 1px;
+        left: 50%;
+        right: 50%;
+    }
+
+    70% {
+        height: 1px;
+        left: 0;
+        right: 0;
+    }
+
+    71% {
+        height: 0;
+        left: 0;
+        right: 0;
+    }
+}
+
+@-o-keyframes animated-page {
+    0% {
+        transform: scaleY(1);
+    }
+
+    70% {
+        transform: scaleY(1);
+    }
+
+    71% {
+        transform: scaleY(0.002);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@-o-keyframes animated-page-children {
+    0% {
         opacity: 0;
     }
 
     70% {
-        background-color: var(--foreground);
-        transform: scale(1, 0.002);
-        opacity: 1;
+        opacity: 0;
     }
 
     71% {
-        background-color: transparent;
+        opacity: 1;
+    }
+}
+
+@-o-keyframes animated-page-before {
+    0% {
+        height: 1px;
+        left: 50%;
+        right: 50%;
     }
 
-    100% {
-        transform: scale(1, 1);
+    70% {
+        height: 1px;
+        left: 0;
+        right: 0;
+    }
+
+    71% {
+        height: 0;
+        left: 0;
+        right: 0;
     }
 }
