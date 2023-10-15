@@ -3,12 +3,12 @@ import { FAQ } from 'features/help-page/constants';
 
 export default function HelpPage(): JSX.Element {
     return (
-        <>
+        <section>
             {FAQ.map(({ title, content }) => (
                 <Accordion key={title} title={title} titleVariant="subtitle2">
                     {content}
                 </Accordion>
             ))}
-        </>
+        </section>
     );
 }

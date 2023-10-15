@@ -1,5 +1,7 @@
 'use client';
 
+import cx from 'classnames';
+
 import Paper from 'components/paper/Paper';
 import Spacing from 'components/spacing/Spacing';
 import AppTabsContextProvider from 'contexts/AppTabsContext';
@@ -25,7 +27,15 @@ export default function AppTabs(): JSX.Element {
             <Spacing xs={16} />
 
             <Paper className={styles['tabs-paper']}>
-                {isHelpTab ? <HelpPage /> : <SuggesterPage />}
+                <div
+                    className={cx(styles['tabs-content'], {
+                        [styles['tabs-content--shifted']]: isHelpTab,
+                    })}
+                >
+                    <SuggesterPage />
+
+                    <HelpPage />
+                </div>
             </Paper>
         </AppTabsContextProvider>
     );

@@ -12,7 +12,7 @@ export default function SuggesterPage(): JSX.Element {
     };
 
     return (
-        <>
+        <section>
             <Select
                 value={value}
                 shouldAddSearch={true}
@@ -34,6 +34,6 @@ export default function SuggesterPage(): JSX.Element {
                     rows={7}
                 />
             )}
-        </>
+        </section>
     );
 }

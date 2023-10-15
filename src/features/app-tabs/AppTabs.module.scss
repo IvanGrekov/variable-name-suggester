@@ -1,4 +1,40 @@
+@import 'styles/variables.scss';
+
 .tabs-paper {
     flex-grow: 1;
-    overflow: auto;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.tabs-content {
+    position: relative;
+    display: flex;
+    gap: $default-spacing-md;
+    transform: translateX(0);
+    transition: transform calc(#{$base-transition-duration} * 2)
+        $base-animation-function;
+
+    &--shifted {
+        transform: translateX(calc(#{$default-spacing-md} * -1 - 100%));
+    }
+
+    & > * {
+        flex-grow: 1;
+        flex-shrink: 0;
+        width: 100%;
+        padding: $default-spacing-md;
+        overflow-y: auto;
+    }
+
+    @media (max-width: $screen-md) {
+        gap: $default-spacing-sm;
+
+        &--shifted {
+            transform: translateX(calc(#{$default-spacing-sm} * -1 - 100%));
+        }
+
+        & > * {
+            padding: $default-spacing-sm;
+        }
+    }
 }
