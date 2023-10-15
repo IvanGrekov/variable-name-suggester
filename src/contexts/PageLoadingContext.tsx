@@ -16,7 +16,7 @@ const PageLoadingContext = createContext<IPageLoadingContextValues | null>(
     null,
 );
 
-export function PageLoadingProvider({
+export default function PageLoadingProvider({
     children,
 }: PropsWithChildren): JSX.Element {
     const [isLoading, setIsLoading] = useState(false);

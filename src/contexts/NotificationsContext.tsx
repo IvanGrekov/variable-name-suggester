@@ -7,6 +7,8 @@ import {
     useCallback,
     useMemo,
     PropsWithChildren,
+    Dispatch,
+    SetStateAction,
 } from 'react';
 
 import {
@@ -14,16 +16,31 @@ import {
     MAX_NOTIFICATIONS,
     DEFAULT_NOTIFICATION_PRIORITY,
 } from 'constants/notifications.constants';
-import {
-    TNotificationsContextValue,
-    TAddNotification,
-} from 'types/notifications.types';
+import { TNotifications, TAddNotification } from 'types/notifications.types';
 
-const NotificationsContext = createContext<TNotificationsContextValue | null>(
+interface INotificationsContextValue {
+    notifications: TNotifications;
+    addNotification: TAddNotification;
+    setNotifications: Dispatch<SetStateAction<TNotifications>>;
+}
+
+const NotificationsContext = createContext<INotificationsContextValue | null>(
     null,
 );
 
-export const useNotificationsContext = (): TNotificationsContextValue => {
+export default function NotificationsProvider({
+    children,
+}: PropsWithChildren): JSX.Element {
+    const value = useInitNotifications();
+
+    return (
+        <NotificationsContext.Provider value={value}>
+            {children}
+        </NotificationsContext.Provider>
+    );
+}
+
+export const useNotificationsContext = (): INotificationsContextValue => {
     const context = useContext(NotificationsContext);
 
     if (!context) {
@@ -35,7 +52,7 @@ export const useNotificationsContext = (): TNotificationsContextValue => {
     return context;
 };
 
-type TUseInitNotifications = () => TNotificationsContextValue;
+type TUseInitNotifications = () => INotificationsContextValue;
 
 export const useInitNotifications: TUseInitNotifications = () => {
     const [notifications, setNotifications] = useState(DEFAULT_NOTIFICATIONS);
@@ -62,15 +79,3 @@ export const useInitNotifications: TUseInitNotifications = () => {
         [notifications, addNotification, setNotifications],
     );
 };
-
-export function NotificationsProvider({
-    children,
-}: PropsWithChildren): JSX.Element {
-    const value = useInitNotifications();
-
-    return (
-        <NotificationsContext.Provider value={value}>
-            {children}
-        </NotificationsContext.Provider>
-    );
-}

@@ -56,14 +56,19 @@
 @keyframes animated-page-children {
     0% {
         opacity: 0;
-    }
-
-    70% {
-        opacity: 0;
+        pointer-events: none;
     }
 
     71% {
+        opacity: 0;
+    }
+
+    72% {
         opacity: 1;
+    }
+
+    90% {
+        pointer-events: auto;
     }
 }
 
@@ -108,14 +113,19 @@
 @-moz-keyframes animated-page-children {
     0% {
         opacity: 0;
-    }
-
-    70% {
-        opacity: 0;
+        pointer-events: none;
     }
 
     71% {
+        opacity: 0;
+    }
+
+    72% {
         opacity: 1;
+    }
+
+    90% {
+        pointer-events: auto;
     }
 }
 
@@ -160,14 +170,19 @@
 @-webkit-keyframes animated-page-children {
     0% {
         opacity: 0;
-    }
-
-    70% {
-        opacity: 0;
+        pointer-events: none;
     }
 
     71% {
+        opacity: 0;
+    }
+
+    72% {
         opacity: 1;
+    }
+
+    90% {
+        pointer-events: auto;
     }
 }
 
@@ -212,14 +227,19 @@
 @-o-keyframes animated-page-children {
     0% {
         opacity: 0;
-    }
-
-    70% {
-        opacity: 0;
+        pointer-events: none;
     }
 
     71% {
+        opacity: 0;
+    }
+
+    72% {
         opacity: 1;
+    }
+
+    90% {
+        pointer-events: auto;
     }
 }
 

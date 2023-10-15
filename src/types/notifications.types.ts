@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export enum ENotificationType {
     SUCCESS = 'success',
     ERROR = 'error',
@@ -27,9 +25,3 @@ export type TAddNotification = (
         priority?: ENotificationPriority;
     },
 ) => void;
-
-export type TNotificationsContextValue = {
-    notifications: TNotifications;
-    addNotification: TAddNotification;
-    setNotifications: Dispatch<SetStateAction<TNotifications>>;
-};

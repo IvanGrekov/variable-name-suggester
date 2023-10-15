@@ -1,12 +1,30 @@
 import Tab from 'components/tabs/Tab';
 import Tabs from 'components/tabs/Tabs';
-import { EAppTabs } from 'types/appTabs.types';
+import { useAppTabsContext } from 'contexts/AppTabsContext';
+import { EAppTabs } from 'features/app-tabs/types';
 
 export default function AppTabsNav(): JSX.Element {
+    const { currentTab, setCurrentTab } = useAppTabsContext();
+
     return (
         <Tabs isDelayed={true}>
-            <Tab path={EAppTabs.SUGGESTER} label="Suggester" />
-            <Tab path={EAppTabs.HELP} label="Help" />
+            <Tab
+                value={EAppTabs.SUGGESTER}
+                label="Suggester"
+                customCurrentTab={currentTab}
+                customClickHandler={(): void => {
+                    setCurrentTab(EAppTabs.SUGGESTER);
+                }}
+            />
+
+            <Tab
+                value={EAppTabs.HELP}
+                label="Help"
+                customCurrentTab={currentTab}
+                customClickHandler={(): void => {
+                    setCurrentTab(EAppTabs.HELP);
+                }}
+            />
         </Tabs>
     );
 }

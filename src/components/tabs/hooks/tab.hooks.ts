@@ -10,7 +10,10 @@ import { useCurrentTab } from 'hooks/tabs.hooks';
 
 type TTabElementRef = MutableRefObject<HTMLDivElement | null>;
 
-type TUseTabIndicatorConnectionProps = Pick<ITabProps, 'path'> & {
+type TUseTabIndicatorConnectionProps = Pick<
+    ITabProps,
+    'value' | 'customCurrentTab'
+> & {
     tabElementRef: TTabElementRef;
 };
 
@@ -20,10 +23,13 @@ type TUseTabIndicatorConnection = (
 
 export const useTabIndicatorConnection: TUseTabIndicatorConnection = ({
     tabElementRef,
-    path,
+    value,
+    customCurrentTab,
 }) => {
     const tabsContext = useTabsContext();
     const currentTab = useCurrentTab();
+
+    const activeTab = customCurrentTab ?? currentTab;
 
     useEffect(() => {
         const { indicatorElement, initialIndicatorLeftPosition } =
@@ -38,44 +44,23 @@ export const useTabIndicatorConnection: TUseTabIndicatorConnection = ({
             return;
         }
 
-        if (path === currentTab) {
+        if (value === activeTab) {
             const newLeftPosition =
                 tabElementRect.left - initialIndicatorLeftPosition;
             indicatorElement.style.left = `${newLeftPosition}px`;
         }
-    }, [tabsContext, tabElementRef, path, currentTab]);
+    }, [tabsContext, tabElementRef, value, activeTab]);
 };
 
-type TUseTabListenerProps = Pick<ITabProps, 'path'> & {
-    tabElementRef: TTabElementRef;
-};
-type TUseTabListener = (props: TUseTabListenerProps) => void;
+type TUseTabClickListener = (path: ITabProps['value']) => VoidFunction;
 
-export const useTabListener: TUseTabListener = ({ tabElementRef, path }) => {
+export const useTabClickListener: TUseTabClickListener = (path) => {
     const router = useRouter();
     const pathname = usePathname();
     const getStringifiedSearchParams = useGetStringifiedSearchParams();
 
-    useEffect(() => {
-        const tabElement = tabElementRef.current;
-
-        if (!tabElement) {
-            return;
-        }
-
-        const clickHandler = (): void => {
-            const params = getStringifiedSearchParams(TAB_PARAM_NAME, path);
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            router.push(`${pathname}${params}`, undefined, {
-                shallow: true,
-            });
-        };
-
-        tabElement.addEventListener('click', clickHandler);
-
-        return (): void => {
-            tabElement.removeEventListener('click', clickHandler);
-        };
-    }, [tabElementRef, pathname, path, router, getStringifiedSearchParams]);
+    return () => {
+        const params = getStringifiedSearchParams(TAB_PARAM_NAME, path);
+        router.push(`${pathname}${params}`);
+    };
 };

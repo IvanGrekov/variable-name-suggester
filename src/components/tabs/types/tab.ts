@@ -1,4 +1,6 @@
 export interface ITabProps {
-    path: string;
+    value: string;
     label: string;
+    customCurrentTab?: string;
+    customClickHandler?: VoidFunction;
 }

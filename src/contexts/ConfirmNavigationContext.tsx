@@ -6,17 +6,19 @@ import {
     useMemo,
     useContext,
     PropsWithChildren,
+    Dispatch,
+    SetStateAction,
 } from 'react';
 
-import { IConfirmNavigationContext } from 'types/confirmNavigation.types';
+interface IConfirmNavigationContextValue {
+    shouldConfirmNavigation: boolean;
+    setShouldConfirmNavigation: Dispatch<SetStateAction<boolean>>;
+}
 
 export const ConfirmNavigationContext =
-    createContext<IConfirmNavigationContext>({
-        shouldConfirmNavigation: false,
-        setShouldConfirmNavigation: () => {},
-    });
+    createContext<IConfirmNavigationContextValue | null>(null);
 
-export function ConfirmNavigationProvider({
+export default function ConfirmNavigationProvider({
     children,
 }: PropsWithChildren): JSX.Element {
     const [shouldConfirmNavigation, setShouldConfirmNavigation] =
@@ -37,6 +39,15 @@ export function ConfirmNavigationProvider({
     );
 }
 
-export const useConfirmNavigationContext = (): IConfirmNavigationContext => {
-    return useContext(ConfirmNavigationContext);
-};
+export const useConfirmNavigationContext =
+    (): IConfirmNavigationContextValue => {
+        const context = useContext(ConfirmNavigationContext);
+
+        if (!context) {
+            throw new Error(
+                'useConfirmNavigationContext must be used within a ConfirmNavigationProvider',
+            );
+        }
+
+        return context;
+    };

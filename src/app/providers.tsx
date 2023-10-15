@@ -1,7 +1,7 @@
 'use client';
 
-import { NotificationsProvider } from 'contexts/NotificationsContext';
-import { PageLoadingProvider } from 'contexts/PageLoadingContext';
+import NotificationsProvider from 'contexts/NotificationsContext';
+import PageLoadingProvider from 'contexts/PageLoadingContext';
 
 export default function Providers({
     children,

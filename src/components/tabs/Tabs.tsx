@@ -22,8 +22,8 @@ export default function Tabs({ children, isDelayed }: ITabsProps): JSX.Element {
     >(null);
 
     useInitIndicator({
-        isDelayed,
         indicatorElementRef,
+        isDelayed,
         setIndicatorLeftPosition,
     });
 

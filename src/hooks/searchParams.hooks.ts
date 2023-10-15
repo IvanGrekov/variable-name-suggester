@@ -2,6 +2,12 @@ import { useCallback } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
+export const useGetSearchParams = (): URLSearchParams => {
+    const routerSearchParams = useSearchParams();
+
+    return new URLSearchParams(Array.from(routerSearchParams.entries()));
+};
+
 type TUseGetStringifiedSearchParams = () => (
     newKey?: string,
     newValue?: string,

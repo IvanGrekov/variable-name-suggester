@@ -16,7 +16,6 @@ import ScrollTopButton from 'components/scroll-top-button/ScrollTopButton';
 import Spacing from 'components/spacing/Spacing';
 import Typography from 'components/typography/Typography';
 import AppTabs from 'features/app-tabs/AppTabs';
-import AppTabsNav from 'features/app-tabs/AppTabsNav';
 import { EAppTitle } from 'types/appTitle.types';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -51,10 +50,6 @@ export default function RootLayout({
                         >
                             <div className={styles['animated-content']}>
                                 <Spacing xs={16} sm={24} md={32} />
-
-                                <AppTabsNav />
-
-                                <Spacing xs={16} />
 
                                 <AppTabs />
 
