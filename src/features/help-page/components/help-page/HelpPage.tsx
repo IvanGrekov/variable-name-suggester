@@ -1,5 +1,5 @@
 import Accordion from 'components/accordion/Accordion';
-import { FAQ } from 'features/help-page/constants';
+import { FAQ } from 'features/help-page/components/help-page/constants';
 
 export default function HelpPage(): JSX.Element {
     return (

@@ -5,12 +5,12 @@ import cx from 'classnames';
 import Paper from 'components/paper/Paper';
 import Spacing from 'components/spacing/Spacing';
 import AppTabsContextProvider from 'contexts/AppTabsContext';
-import styles from 'features/app-tabs/AppTabs.module.scss';
-import AppTabsNav from 'features/app-tabs/AppTabsNav';
-import { useGetAppTabsContextValue } from 'features/app-tabs/hooks';
-import { EAppTabs } from 'features/app-tabs/types';
-import HelpPage from 'features/help-page/HelpPage';
-import SuggesterPage from 'features/suggester-page/SuggesterPage';
+import styles from 'features/app-tabs/components/app-tabs/AppTabs.module.scss';
+import { useGetAppTabsContextValue } from 'features/app-tabs/components/app-tabs/hooks';
+import AppTabsNav from 'features/app-tabs/components/app-tabs-nav/AppTabsNav';
+import { EAppTabs } from 'features/app-tabs/types/appTabs.types';
+import HelpPage from 'features/help-page/components/help-page/HelpPage';
+import SuggesterPage from 'features/suggester-page/components/suggester-page/SuggesterPage';
 
 export default function AppTabs(): JSX.Element {
     const { currentTab, setCurrentTab } = useGetAppTabsContextValue();

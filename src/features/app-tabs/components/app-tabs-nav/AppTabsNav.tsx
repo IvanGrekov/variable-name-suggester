@@ -1,7 +1,7 @@
 import Tab from 'components/tabs/Tab';
 import Tabs from 'components/tabs/Tabs';
 import { useAppTabsContext } from 'contexts/AppTabsContext';
-import { EAppTabs } from 'features/app-tabs/types';
+import { EAppTabs } from 'features/app-tabs/types/appTabs.types';
 
 export default function AppTabsNav(): JSX.Element {
     const { currentTab, setCurrentTab } = useAppTabsContext();

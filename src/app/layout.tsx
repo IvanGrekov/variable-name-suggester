@@ -15,7 +15,7 @@ import Notifications from 'components/notifications/Notifications';
 import ScrollTopButton from 'components/scroll-top-button/ScrollTopButton';
 import Spacing from 'components/spacing/Spacing';
 import Typography from 'components/typography/Typography';
-import AppTabs from 'features/app-tabs/AppTabs';
+import AppTabs from 'features/app-tabs/components/app-tabs/AppTabs';
 import { EAppTitle } from 'types/appTitle.types';
 
 const inter = Inter({ subsets: ['latin'] });

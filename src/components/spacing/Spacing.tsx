@@ -21,5 +21,5 @@ export default function Spacing({
         xl,
     });
 
-    return <div style={{ height: spacingSize }} />;
+    return <div style={{ height: spacingSize, flexShrink: 0 }} />;
 }

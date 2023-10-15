@@ -10,6 +10,7 @@
     position: relative;
     display: flex;
     gap: $default-spacing-md;
+    height: 100%;
     transform: translateX(0);
     transition: transform calc(#{$base-transition-duration} * 2)
         $base-animation-function;
@@ -22,6 +23,7 @@
         flex-grow: 1;
         flex-shrink: 0;
         width: 100%;
+        height: 100%;
         padding: $default-spacing-md;
         overflow-y: auto;
     }
