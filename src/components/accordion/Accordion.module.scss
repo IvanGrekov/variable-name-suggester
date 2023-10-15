@@ -4,11 +4,21 @@
 .accordion {
     --border: $border-width solid var(--foreground-invisible);
 
-    padding: $default-spacing-sm;
     transition: all $base-transition-duration;
 
     &--open {
         border-radius: $border-radius-md;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: $default-spacing-sm;
+    }
+
+    &--spaced {
+        &.accordion--open {
+            padding: $default-spacing-sm;
+            margin-bottom: 0;
+        }
     }
 
     &--open.accordion--spaced {
