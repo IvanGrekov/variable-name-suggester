@@ -4,7 +4,8 @@
 .accordion {
     --border: $border-width solid var(--foreground-invisible);
 
-    transition: all $base-transition-duration;
+    transition-property: margin, padding, border-radius, box-shadow;
+    transition-duration: $base-transition-duration;
 
     &--open {
         border-radius: $border-radius-md;
@@ -67,5 +68,6 @@
 
     &--open {
         @include visible-animated-element();
+        transition-delay: calc(#{$base-transition-duration} / 1.5);
     }
 }
