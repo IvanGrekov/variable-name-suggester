@@ -1,3 +1,6 @@
+import ListItem from 'components/list/ListItem';
+import OrderedList from 'components/list/OrderedList';
+import Spacing from 'components/spacing/Spacing';
 import Typography from 'components/typography/Typography';
 
 export const FAQ = [
@@ -24,35 +27,16 @@ export const FAQ = [
         title: 'How to Use?',
         content: (
             <>
-                <Typography>To get started, follow these steps:</Typography>
-                <ol>
-                    <li>
-                        <Typography>
-                            Select an area from the dropdown field.
-                        </Typography>
-                    </li>
+                <OrderedList>
+                    <ListItem value="Select at least one area from the dropdown field." />
 
-                    <li>
-                        <Typography>
-                            Once you've selected an area, a textarea field will
-                            appear.
-                        </Typography>
-                    </li>
+                    <ListItem value="Once you've selected an area, a char will appear." />
 
-                    <li>
-                        <Typography>
-                            Type in a description or hint about the variable in
-                            the textarea.
-                        </Typography>
-                    </li>
+                    <ListItem value="Type in a description or hint about the variable in the textarea of the chat." />
 
-                    <li>
-                        <Typography>
-                            Click on the 'Suggest' button to get your variable
-                            name suggestions.
-                        </Typography>
-                    </li>
-                </ol>
+                    <ListItem value="Click on the submit button to get your variable name suggestions." />
+                </OrderedList>
+                <Spacing xs={8} />
             </>
         ),
     },

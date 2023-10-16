@@ -1,0 +1,13 @@
+@import 'styles/variables.scss';
+
+.bullet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: $spacing-5;
+    height: $spacing-5;
+    background-color: var(--foreground);
+    border-radius: 50%;
+    color: var(--background);
+}

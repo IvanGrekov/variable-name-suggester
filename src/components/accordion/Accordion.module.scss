@@ -5,7 +5,7 @@
     --border: $border-width solid var(--foreground-invisible);
 
     transition-property: margin, padding, border-radius, box-shadow;
-    transition-duration: $base-transition-duration;
+    transition-duration: calc(#{$base-transition-duration} / 2);
 
     &--open {
         border-radius: $border-radius-md;
@@ -68,6 +68,7 @@
 
     &--open {
         @include visible-animated-element();
-        transition-delay: calc(#{$base-transition-duration} / 1.5);
+
+        transition-delay: calc(#{$base-transition-duration} / 2);
     }
 }

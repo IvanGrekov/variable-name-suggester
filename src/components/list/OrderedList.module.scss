@@ -1,0 +1,13 @@
+@import 'styles/variables.scss';
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+}
+
+.item {
+    display: flex;
+    gap: $spacing-2;
+    align-items: center;
+}
