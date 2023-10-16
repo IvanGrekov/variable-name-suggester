@@ -1,7 +1,9 @@
 import Select from 'components/select/Select';
+import { AREA_OPTIONS } from 'features/suggester-page/components/select-area-field/constants';
+import { TAreaFieldValue } from 'features/suggester-page/types/areaField';
 
 interface ISelectAreaFieldProps {
-    value: string;
+    value: TAreaFieldValue;
     onChange: (value: string | null) => void;
 }
 
@@ -12,11 +14,12 @@ export default function SelectAreaField({
     return (
         <Select
             value={value}
+            multiple={true}
             shouldAddSearch={true}
-            options={['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']}
+            options={AREA_OPTIONS}
             onChange={onChange}
             label="Area"
-            placeholder="Select Area"
+            placeholder="Select At Least One Area"
             isFullWidth={true}
         />
     );
