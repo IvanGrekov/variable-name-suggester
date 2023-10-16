@@ -7,7 +7,7 @@ $default-spacing-sm: $spacing-3;
     flex-grow: 1;
     min-height: 25rem;
     padding: $default-spacing-md;
-    background-color: var(--middle-opacity);
+    border: $border-width var(--foreground) solid;
     overflow: hidden;
 
     animation-name: chat-appear;
