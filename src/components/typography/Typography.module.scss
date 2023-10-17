@@ -102,10 +102,18 @@
 
     &--subtitle2 {
         font-size: 1.25rem;
+
+        @media (max-width: $screen-lg) {
+            font-size: 1.125rem;
+        }
     }
 
     &--body1 {
         font-size: 1.125rem;
+
+        @media (max-width: $screen-lg) {
+            font-size: 1rem;
+        }
     }
 
     &--body2 {

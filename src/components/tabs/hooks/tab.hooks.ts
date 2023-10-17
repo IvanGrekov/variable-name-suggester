@@ -32,8 +32,7 @@ export const useTabIndicatorConnection: TUseTabIndicatorConnection = ({
     const activeTab = customCurrentTab ?? currentTab;
 
     useEffect(() => {
-        const { indicatorElement, initialIndicatorLeftPosition } =
-            tabsContext || {};
+        const { indicatorElement, initialIndicatorLeftPosition } = tabsContext;
         const tabElementRect = tabElementRef.current?.getBoundingClientRect();
 
         if (
