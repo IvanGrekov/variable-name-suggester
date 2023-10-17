@@ -10,7 +10,6 @@
     color: var(--background);
 
     &--admin {
-        padding-right: $spacing-2;
         border-bottom-left-radius: 0;
         background-color: var(--middle-color);
 
@@ -68,16 +67,30 @@
     flex-shrink: 0;
     background-color: var(--foreground);
     margin-right: $spacing-3;
+
+    @media (max-width: $screen-sm) {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+        margin-right: $spacing-2;
+    }
 }
 
 .text {
     transform: translateY(-0.05rem);
+
+    @media (max-width: $screen-sm) {
+        text-wrap: balance;
+    }
 }
 
 .remove-button {
     padding: $spacing-2;
     border: none;
     opacity: 0;
+
+    @media (max-width: $screen-sm) {
+        padding: $spacing-1;
+    }
 
     &:hover,
     &:focus,

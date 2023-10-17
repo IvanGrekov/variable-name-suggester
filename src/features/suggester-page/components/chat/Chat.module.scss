@@ -28,10 +28,18 @@ $default-spacing-sm: $spacing-3;
     @media (max-width: $screen-md) {
         padding: $default-spacing-sm;
     }
+
+    @media (max-width: $screen-sm) {
+        padding: $spacing-1;
+    }
 }
 
 .message {
     max-width: 85%;
+
+    @media (max-width: $screen-sm) {
+        max-width: 100%;
+    }
 }
 
 @keyframes chat-appear {
