@@ -48,16 +48,23 @@
 }
 
 .remove-button {
+    padding: $spacing-2;
+    border: none;
+    background-color: var(--background-opacity);
     opacity: 0;
-    padding: $spacing-1;
+
+    svg {
+        fill: var(--background);
+    }
 
     &:hover,
     &:focus,
     &:focus-visible {
+        border: none;
         opacity: 1;
 
         svg {
-            fill: var(--background);
+            fill: var(--middle-color);
         }
     }
 }
