@@ -32,9 +32,9 @@ export default function AppTabs(): JSX.Element {
                         [styles['tabs-content--shifted']]: isHelpTab,
                     })}
                 >
-                    <SuggesterPage />
+                    <SuggesterPage className={styles['suggester-page']} />
 
-                    <HelpPage />
+                    <HelpPage className={styles['help-page']} />
                 </div>
             </Paper>
         </AppTabsContextProvider>

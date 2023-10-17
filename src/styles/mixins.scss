@@ -1,12 +1,12 @@
 @import 'styles/variables.scss';
 
 @mixin hidden-animated-element(
-    $delay: $base-transition-duration,
+    $duration: $base-transition-duration,
     $transition-function: ease
 ) {
     visibility: hidden;
     opacity: 0;
-    transition: opacity $delay, visibility 0s $delay;
+    transition: opacity $duration, visibility 0s $duration;
     transition-timing-function: $transition-function;
 }
 

@@ -46,12 +46,12 @@ const useUpdateSuggesterChat: TUseUpdateSuggesterChat = () => {
     };
 };
 
-type TUseAreaValueState = () => {
+export interface IUseAreaValueStateResult {
     areaValue: TAreaFieldValue;
     setAreaValue: (value: string | null) => void;
-};
+}
 
-export const useAreaValueState: TUseAreaValueState = () => {
+export const useAreaValueState = (): IUseAreaValueStateResult => {
     const { localStorageValue, setLocalStorageValue } =
         useLocalStorage<TAreaFieldValue>({
             key: 'area',

@@ -1,10 +1,11 @@
 import Select from 'components/select/Select';
 import { AREA_OPTIONS } from 'features/suggester-page/components/select-area-field/constants';
-import { useAreaValueState } from 'features/suggester-page/components/select-area-field/hooks';
+import { IUseAreaValueStateResult } from 'features/suggester-page/hooks/areaField.hooks';
 
-export default function SelectAreaField(): JSX.Element {
-    const { areaValue, setAreaValue } = useAreaValueState();
-
+export default function SelectAreaField({
+    areaValue,
+    setAreaValue,
+}: IUseAreaValueStateResult): JSX.Element {
     return (
         <Select
             value={areaValue}

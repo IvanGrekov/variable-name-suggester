@@ -4,7 +4,7 @@ import { devtools, persist, createJSONStorage } from 'zustand/middleware';
 import {
     ISuggesterChatState,
     TSuggesterChatStore,
-} from 'features/suggester-page/stores/suggester-chat/types/store.types';
+} from 'features/suggester-page/stores/suggester-chat/types';
 import { createChatMessage } from 'features/suggester-page/stores/suggester-chat/utils';
 
 const initialSuggesterChatState: ISuggesterChatState = {

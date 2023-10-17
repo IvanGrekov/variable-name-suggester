@@ -1,24 +1,40 @@
+import cx from 'classnames';
+
 import Spacing from 'components/spacing/Spacing';
+import Chat from 'features/suggester-page/components/chat/Chat';
+import ChatEmptyState from 'features/suggester-page/components/chat-empty-state/ChatEmptyState';
 import SelectAreaField from 'features/suggester-page/components/select-area-field/SelectAreaField';
-import SuggesterChat from 'features/suggester-page/components/suggester-chat/SuggesterChat';
-import SuggesterChatEmptyState from 'features/suggester-page/components/suggester-chat-empty-state/SuggesterChatEmptyState';
 import styles from 'features/suggester-page/components/suggester-page/SuggesterPage.module.scss';
+import { useAreaValueState } from 'features/suggester-page/hooks/areaField.hooks';
 import { useSelectIsSuggesterChatEmpty } from 'features/suggester-page/stores/suggester-chat/selectors';
 
-export default function SuggesterPage(): JSX.Element {
+interface ISuggesterPageProps {
+    className?: string;
+}
+
+export default function SuggesterPage({
+    className,
+}: ISuggesterPageProps): JSX.Element {
+    const { areaValue, setAreaValue } = useAreaValueState();
     const isChatEmpty = useSelectIsSuggesterChatEmpty();
 
     return (
-        <section className={styles.page}>
-            <SelectAreaField />
+        <section className={cx(styles.page, className)}>
+            <SelectAreaField
+                areaValue={areaValue}
+                setAreaValue={setAreaValue}
+            />
 
             <Spacing xs={20} />
 
             {isChatEmpty && (
-                <SuggesterChatEmptyState className={styles['empty-state']} />
+                <ChatEmptyState
+                    areaValue={areaValue}
+                    className={styles['empty-state']}
+                />
             )}
 
-            <SuggesterChat />
+            <Chat areaValue={areaValue} />
         </section>
     );
 }

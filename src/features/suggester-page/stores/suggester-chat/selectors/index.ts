@@ -4,7 +4,7 @@ import {
     TAddMessage,
     TRemoveMessage,
     TResetChat,
-} from 'features/suggester-page/stores/suggester-chat/types/store.types';
+} from 'features/suggester-page/stores/suggester-chat/types';
 
 export const useSelectSuggesterChat = (): ISuggesterChatState['chat'] => {
     const chat = useSuggesterChatStore((state) => state.chat);

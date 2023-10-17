@@ -1,4 +1,5 @@
 @import 'styles/variables.scss';
+@import 'styles/mixins.scss';
 
 .tabs-paper {
     flex-grow: 1;
@@ -7,6 +8,8 @@
 }
 
 .tabs-content {
+    $hide-tab-duration: 600ms;
+
     position: relative;
     display: flex;
     gap: $default-spacing-md;
@@ -15,8 +18,24 @@
     transition: transform calc(#{$base-transition-duration} * 2)
         $base-animation-function;
 
+    .suggester-page {
+        @include visible-animated-element();
+    }
+
+    .help-page {
+        @include hidden-animated-element($hide-tab-duration);
+    }
+
     &--shifted {
         transform: translateX(calc(#{$default-spacing-md} * -1 - 100%));
+
+        .suggester-page {
+            @include hidden-animated-element($hide-tab-duration);
+        }
+
+        .help-page {
+            @include visible-animated-element();
+        }
     }
 
     & > * {
