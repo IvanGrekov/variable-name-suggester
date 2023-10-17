@@ -1,5 +1,4 @@
 @import 'styles/variables.scss';
-@import 'styles/mixins.scss';
 
 .message {
     position: relative;
@@ -33,7 +32,7 @@
 
     &:hover {
         .remove-button {
-            @include visible-animated-element();
+            opacity: 1;
         }
     }
 }
@@ -49,12 +48,14 @@
 }
 
 .remove-button {
-    @include hidden-animated-element();
-
+    opacity: 0;
     padding: $spacing-1;
 
     &:hover,
-    &:focus {
+    &:focus,
+    &:focus-visible {
+        opacity: 1;
+
         svg {
             fill: var(--background);
         }
