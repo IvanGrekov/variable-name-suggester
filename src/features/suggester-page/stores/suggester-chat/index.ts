@@ -26,6 +26,31 @@ export const useSuggesterChatStore = create<TSuggesterChatStore>()(
                     });
                 },
 
+                addLoadingMessage: ({ userRole }): void => {
+                    const newMessage = createChatMessage({
+                        userRole,
+                        text: '',
+                    });
+                    newMessage.isLoading = true;
+                    const newChat = [...get().chat, newMessage];
+
+                    set({
+                        chat: newChat,
+                    });
+                },
+
+                editMessage: ({ id, ...newMessage }): void => {
+                    const newChat = get().chat.map((message) =>
+                        message.id === id
+                            ? { ...message, ...newMessage }
+                            : message,
+                    );
+
+                    set({
+                        chat: newChat,
+                    });
+                },
+
                 removeMessage: (messageId): void => {
                     const newChat = get().chat.filter(
                         ({ id }) => id !== messageId,
