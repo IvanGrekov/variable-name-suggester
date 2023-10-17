@@ -12,6 +12,12 @@ export const useSelectSuggesterChat = (): ISuggesterChatState['chat'] => {
     return chat;
 };
 
+export const useSelectIsSuggesterChatEmpty = (): boolean => {
+    const chat = useSuggesterChatStore((state) => state.chat);
+
+    return chat.length === 0;
+};
+
 export const useSelectAddSuggesterChatMessage = (): TAddMessage => {
     const addMessage = useSuggesterChatStore((state) => state.addMessage);
 
