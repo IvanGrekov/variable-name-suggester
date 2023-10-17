@@ -21,7 +21,7 @@ export default function SuggesterChatEmptyState({
             </Typography>
 
             <Typography className={styles.description}>
-                Feel free to start a chat for personalized tips!
+                Please select at least one area of interest!
             </Typography>
         </div>
     );

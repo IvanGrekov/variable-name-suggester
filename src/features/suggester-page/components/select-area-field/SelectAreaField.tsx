@@ -1,23 +1,17 @@
 import Select from 'components/select/Select';
 import { AREA_OPTIONS } from 'features/suggester-page/components/select-area-field/constants';
-import { TAreaFieldValue } from 'features/suggester-page/types/areaField';
+import { useAreaValueState } from 'features/suggester-page/components/select-area-field/hooks';
 
-interface ISelectAreaFieldProps {
-    value: TAreaFieldValue;
-    onChange: (value: string | null) => void;
-}
+export default function SelectAreaField(): JSX.Element {
+    const { areaValue, setAreaValue } = useAreaValueState();
 
-export default function SelectAreaField({
-    value,
-    onChange,
-}: ISelectAreaFieldProps): JSX.Element {
     return (
         <Select
-            value={value}
+            value={areaValue}
             multiple={true}
             shouldAddSearch={true}
             options={AREA_OPTIONS}
-            onChange={onChange}
+            onChange={setAreaValue}
             label="Area"
             placeholder="Select At Least One Area"
             isFullWidth={true}

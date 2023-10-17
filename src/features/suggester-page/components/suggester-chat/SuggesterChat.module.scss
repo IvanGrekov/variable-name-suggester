@@ -27,15 +27,6 @@ $default-spacing-sm: $spacing-3;
     }
 }
 
-.empty-state {
-    position: absolute;
-    width: 50%;
-    min-width: 16.875rem;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 @keyframes chat-appear {
     0% {
         border-radius: 50%;

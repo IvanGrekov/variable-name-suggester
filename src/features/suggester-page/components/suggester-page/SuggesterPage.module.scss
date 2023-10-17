@@ -1,4 +1,14 @@
 .page {
+    position: relative;
     display: flex;
     flex-direction: column;
+}
+
+.empty-state {
+    position: absolute;
+    width: 45%;
+    min-width: 16.875rem;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

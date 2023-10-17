@@ -1,19 +1,24 @@
 import Spacing from 'components/spacing/Spacing';
 import SelectAreaField from 'features/suggester-page/components/select-area-field/SelectAreaField';
 import SuggesterChat from 'features/suggester-page/components/suggester-chat/SuggesterChat';
+import SuggesterChatEmptyState from 'features/suggester-page/components/suggester-chat-empty-state/SuggesterChatEmptyState';
 import styles from 'features/suggester-page/components/suggester-page/SuggesterPage.module.scss';
-import { useAreaValueState } from 'features/suggester-page/components/suggester-page/hooks';
+import { useSelectIsSuggesterChatEmpty } from 'features/suggester-page/stores/suggester-chat/selectors';
 
 export default function SuggesterPage(): JSX.Element {
-    const { areaValue, setAreaValue } = useAreaValueState();
+    const isChatEmpty = useSelectIsSuggesterChatEmpty();
 
     return (
         <section className={styles.page}>
-            <SelectAreaField value={areaValue} onChange={setAreaValue} />
+            <SelectAreaField />
 
             <Spacing xs={20} />
 
-            <SuggesterChat areaValue={areaValue} />
+            {isChatEmpty && (
+                <SuggesterChatEmptyState className={styles['empty-state']} />
+            )}
+
+            <SuggesterChat />
         </section>
     );
 }
