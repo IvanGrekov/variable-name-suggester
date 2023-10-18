@@ -1,16 +1,10 @@
 @import 'styles/variables.scss';
 
-$default-spacing-md: $spacing-4;
-$default-spacing-sm: $spacing-3;
-
 .chat {
-    position: relative;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: $spacing-4;
     min-height: 25rem;
-    padding: $default-spacing-md;
     border: $border-width var(--foreground) solid;
     overflow: hidden;
 
@@ -24,9 +18,18 @@ $default-spacing-sm: $spacing-3;
         animation-name: chat-disappear;
         animation-duration: 0.3s;
     }
+}
+
+.message-list {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    overflow-y: auto;
+    padding: $spacing-3;
 
     @media (max-width: $screen-md) {
-        padding: $default-spacing-sm;
+        padding: $spacing-3;
     }
 
     @media (max-width: $screen-sm) {
@@ -36,10 +39,21 @@ $default-spacing-sm: $spacing-3;
 
 .message {
     max-width: 85%;
+    animation: message-appear $base-transition-duration $base-animation-function;
+    transition: all $base-transition-duration $base-animation-function;
+
+    &--removing {
+        opacity: 0;
+        translate: -10% 0;
+    }
 
     @media (max-width: $screen-sm) {
         max-width: 100%;
     }
+}
+
+.send-message-field {
+    flex-shrink: 0;
 }
 
 @keyframes chat-appear {
@@ -68,5 +82,17 @@ $default-spacing-sm: $spacing-3;
 
     100% {
         opacity: 0;
+    }
+}
+
+@keyframes message-appear {
+    0% {
+        opacity: 0;
+        translate: -10% 0;
+    }
+
+    100% {
+        opacity: 1;
+        translate: 0 0;
     }
 }

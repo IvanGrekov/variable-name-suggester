@@ -1,11 +1,17 @@
 import { create } from 'zustand';
 import { devtools, persist, createJSONStorage } from 'zustand/middleware';
 
+import { BASE_TRANSITION_DURATION } from 'constants/animationDuration.constants';
 import {
     ISuggesterChatState,
     TSuggesterChatStore,
 } from 'features/suggester-page/stores/suggester-chat/types';
-import { createChatMessage } from 'features/suggester-page/stores/suggester-chat/utils';
+import {
+    createChatMessage,
+    initializeMessageRemoving,
+    filterMessages,
+    mergeStates,
+} from 'features/suggester-page/stores/suggester-chat/utils';
 
 const initialSuggesterChatState: ISuggesterChatState = {
     chat: [],
@@ -52,12 +58,24 @@ export const useSuggesterChatStore = create<TSuggesterChatStore>()(
                 },
 
                 removeMessage: (messageId): void => {
-                    const newChat = get().chat.filter(
-                        ({ id }) => id !== messageId,
-                    );
+                    const messages = get().chat;
+
+                    const chat = initializeMessageRemoving({
+                        messages,
+                        messageId,
+                    });
+
+                    setTimeout(() => {
+                        set({
+                            chat: filterMessages({
+                                messages,
+                                messageId,
+                            }),
+                        });
+                    }, BASE_TRANSITION_DURATION);
 
                     set({
-                        chat: newChat,
+                        chat,
                     });
                 },
 
@@ -68,6 +86,12 @@ export const useSuggesterChatStore = create<TSuggesterChatStore>()(
             {
                 name: 'suggester-chat',
                 storage: createJSONStorage(() => localStorage),
+                merge(prevStore, store) {
+                    return mergeStates({
+                        prevStore,
+                        store,
+                    });
+                },
             },
         ),
     ),

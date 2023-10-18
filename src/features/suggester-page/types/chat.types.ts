@@ -5,6 +5,8 @@ export interface IChatMessage {
     text: string;
     userRole: EUserRole;
     isLoading?: boolean;
+    isError?: boolean;
+    isRemoving?: boolean;
 }
 
 export type TChat = IChatMessage[];
