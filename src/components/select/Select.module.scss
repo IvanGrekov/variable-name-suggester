@@ -135,8 +135,6 @@ $arrow-button-gutter: $spacing-6;
     }
 
     .chip {
-        justify-content: flex-start;
-
         & * {
             white-space: nowrap;
             overflow: hidden;

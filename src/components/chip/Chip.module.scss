@@ -3,10 +3,9 @@
 .chip {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: $spacing-1;
     width: fit-content;
-    min-width: 6.25rem;
     min-height: 2.75rem;
     padding: $spacing-1 $spacing-3;
     border-radius: $border-radius-xl;
@@ -21,13 +20,11 @@
     }
 
     &--small {
-        min-width: 5.625rem;
         min-height: 2rem;
         padding: $spacing-0-5 $spacing-1;
     }
 
     &--big {
-        min-width: 7.5rem;
         min-height: 3.25rem;
         padding: $spacing-2 $spacing-4;
     }
