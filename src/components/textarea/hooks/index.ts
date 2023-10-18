@@ -6,9 +6,13 @@ import {
 } from 'components/textarea/types';
 import { getTextareaHandlers } from 'components/textarea/utils';
 
-type TUseTextarea = (args: ITextareaHandlersArgs) => IUseTextareaResult;
+type TUseTextarea = (
+    args: ITextareaHandlersArgs & {
+        value?: string | number | readonly string[];
+    },
+) => IUseTextareaResult;
 
-export const useTextarea: TUseTextarea = (args) => {
+export const useTextarea: TUseTextarea = ({ value, ...args }) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const id = useId();
@@ -17,8 +21,12 @@ export const useTextarea: TUseTextarea = (args) => {
     const [isFocused, setIsFocused] = useState(false);
 
     useEffect(() => {
-        setIsTextareaFilled(Boolean(textareaRef.current?.value));
-    }, []);
+        if (value === '') {
+            setIsTextareaFilled(false);
+        } else {
+            setIsTextareaFilled(Boolean(textareaRef.current?.value));
+        }
+    }, [textareaRef.current?.value, value]);
 
     const textareaHandlers = getTextareaHandlers({
         setIsFocused,

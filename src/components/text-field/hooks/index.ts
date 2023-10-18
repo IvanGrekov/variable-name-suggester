@@ -10,10 +10,11 @@ import { getInputHandlers } from 'components/text-field/utils';
 type TUseTextField = (
     args: IInputHandlersArgs & {
         type: TTextFieldProps['type'];
+        value?: string | number | readonly string[];
     },
 ) => IUseTextFieldResult;
 
-export const useTextField: TUseTextField = ({ type, ...rest }) => {
+export const useTextField: TUseTextField = ({ type, value, ...rest }) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const id = useId();
@@ -23,8 +24,12 @@ export const useTextField: TUseTextField = ({ type, ...rest }) => {
     const [isValueVisible, setIsValueVisible] = useState(false);
 
     useEffect(() => {
-        setIsInputFilled(Boolean(inputRef.current?.value));
-    }, [inputRef.current?.value]);
+        if (value === '') {
+            setIsInputFilled(false);
+        } else {
+            setIsInputFilled(Boolean(inputRef.current?.value));
+        }
+    }, [inputRef.current?.value, value]);
 
     const inputType = type === 'password' && isValueVisible ? 'text' : type;
     const inputHandlers = getInputHandlers({

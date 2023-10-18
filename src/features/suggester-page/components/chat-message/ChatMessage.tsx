@@ -7,7 +7,7 @@ import AiAvatar from 'features/suggester-page/components/ai-avatar/AiAvatar';
 import styles from 'features/suggester-page/components/chat-message/ChatMessage.module.scss';
 import { useSelectRemoveSuggesterChatMessage } from 'features/suggester-page/stores/suggester-chat/selectors';
 import { IChatMessage } from 'features/suggester-page/types/chat.types';
-import { EUserRole } from 'types/user.types';
+import { getIsAdmin, getIsUser } from 'utils/userRole.utils';
 
 interface IChatMessageProps extends IChatMessage {
     className?: string;
@@ -21,7 +21,8 @@ export default function ChatMessage({
 }: IChatMessageProps): JSX.Element {
     const removeMessage = useSelectRemoveSuggesterChatMessage();
 
-    const isAdmin = userRole === EUserRole.ADMIN;
+    const isAdmin = getIsAdmin(userRole);
+    const isUser = getIsUser(userRole);
 
     return (
         <div
@@ -29,7 +30,7 @@ export default function ChatMessage({
                 styles.message,
                 {
                     [styles['message--admin']]: isAdmin,
-                    [styles['message--user']]: !isAdmin,
+                    [styles['message--user']]: isUser,
                 },
                 className,
             )}

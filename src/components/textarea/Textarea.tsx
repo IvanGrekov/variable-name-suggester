@@ -9,6 +9,7 @@ import { useTextarea } from 'components/textarea/hooks';
 import { TTextareaProps } from 'components/textarea/types';
 
 export default function Textarea({
+    value,
     error,
     required,
     disabled,
@@ -40,6 +41,7 @@ export default function Textarea({
         onTextareaClick,
         onTextareaChange,
     } = useTextarea({
+        value,
         onFocus,
         onBlur,
         onClick,
@@ -62,6 +64,7 @@ export default function Textarea({
                 <textarea
                     ref={textareaRef}
                     id={id}
+                    value={value}
                     disabled={disabled}
                     autoComplete="off"
                     rows={rows}

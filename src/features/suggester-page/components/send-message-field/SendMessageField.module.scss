@@ -1,1 +1,69 @@
 @import 'styles/variables.scss';
+
+.area {
+    position: relative;
+    padding: $spacing-2;
+    display: flex;
+    gap: $spacing-2;
+    background-color: var(--foreground);
+    transition: background-color $input-transition-duration
+        $input-transition-function;
+
+    @media (max-width: $screen-sm) {
+        padding: $spacing-1;
+        padding-left: 0;
+        gap: $spacing-1;
+    }
+}
+
+.text-area {
+    flex-shrink: 0;
+    height: fit-content;
+    color: var(--background);
+    border: none !important;
+    background-color: transparent !important;
+}
+
+.text-area-placeholder {
+    top: 0.9375rem;
+    background-color: transparent !important;
+    color: var(--background);
+
+    &::after {
+        background-color: transparent !important;
+    }
+}
+
+.text-area-counter {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    padding: $spacing-0-5 $spacing-1;
+    border-radius: $border-radius;
+    color: var(--foreground);
+    background-color: var(--background);
+    transition: background-color $input-transition-duration
+        $input-transition-function;
+
+    &--error {
+        background-color: var(--red);
+    }
+}
+
+.send-button {
+    flex-shrink: 0;
+    height: fit-content;
+    border: none;
+
+    svg {
+        fill: var(--background);
+    }
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        svg {
+            fill: var(--hover);
+        }
+    }
+}

@@ -39,12 +39,29 @@
 
 .message {
     max-width: 85%;
+    animation-duration: $base-transition-duration;
+    animation-timing-function: $base-animation-function;
     animation: message-appear $base-transition-duration $base-animation-function;
     transition: all $base-transition-duration $base-animation-function;
 
     &--removing {
         opacity: 0;
-        translate: -10% 0;
+    }
+
+    &--admin {
+        animation-name: admin-message-appear;
+
+        &.message--removing {
+            translate: -10% 0;
+        }
+    }
+
+    &--user {
+        animation-name: user-message-appear;
+
+        &.message--removing {
+            translate: 10% 0;
+        }
     }
 
     @media (max-width: $screen-sm) {
@@ -85,10 +102,22 @@
     }
 }
 
-@keyframes message-appear {
+@keyframes admin-message-appear {
     0% {
         opacity: 0;
         translate: -10% 0;
+    }
+
+    100% {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+@keyframes user-message-appear {
+    0% {
+        opacity: 0;
+        translate: 10% 0;
     }
 
     100% {

@@ -14,6 +14,7 @@ import TextFieldPlaceholder from 'components/text-field-placeholder/TextFieldPla
 import TextFieldWrapper from 'components/text-field-wrapper/TextFieldWrapper';
 
 export default function TextField({
+    value,
     type = 'text',
     error,
     required,
@@ -51,6 +52,7 @@ export default function TextField({
         onInputClick,
         onInputChange,
     } = useTextField({
+        value,
         type,
         onFocus,
         onBlur,
@@ -76,6 +78,7 @@ export default function TextField({
                 <input
                     ref={inputRef}
                     id={id}
+                    value={value}
                     type={inputType}
                     disabled={disabled}
                     autoComplete="off"
