@@ -59,11 +59,57 @@
         fill: var(--background);
     }
 
+    &--animation {
+        animation: send-animation $short-animation-duration
+            $base-animation-function;
+    }
+
     &:hover,
     &:focus,
     &:focus-visible {
         svg {
             fill: var(--hover);
         }
+    }
+
+    &--disabled {
+        svg {
+            fill: var(--background-opacity);
+        }
+    }
+}
+
+@keyframes send-animation {
+    0% {
+        translate: 0 0;
+    }
+
+    10% {
+        translate: -1rem 0;
+    }
+
+    50% {
+        translate: 5rem 0;
+        opacity: 1;
+    }
+
+    51% {
+        translate: 5rem 0;
+        opacity: 0;
+    }
+
+    52% {
+        translate: -5rem 0;
+        opacity: 0;
+    }
+
+    75% {
+        translate: -5rem 0;
+        opacity: 0;
+    }
+
+    100% {
+        translate: 0 0;
+        opacity: 1;
     }
 }
