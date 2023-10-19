@@ -35,7 +35,7 @@ export default function Chat({ areaValue }: IChatProps): JSX.Element {
         >
             <div ref={listRef} className={styles['message-list']}>
                 {chat.map((message) => {
-                    const { id, isRemoving, userRole } = message;
+                    const { id, isRemoving, isLoading, userRole } = message;
 
                     return (
                         <ChatMessage
@@ -43,6 +43,7 @@ export default function Chat({ areaValue }: IChatProps): JSX.Element {
                             {...message}
                             className={cx(styles.message, {
                                 [styles['message--removing']]: isRemoving,
+                                [styles['message--loading']]: isLoading,
                                 [styles['message--admin']]:
                                     getIsAdmin(userRole),
                                 [styles['message--user']]: getIsUser(userRole),

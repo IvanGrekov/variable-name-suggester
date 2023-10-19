@@ -2,6 +2,7 @@ import cx from 'classnames';
 
 import IconButton from 'components/button/IconButton';
 import CloseIcon from 'components/icons/CloseIcon';
+import Skeleton from 'components/skeleton/Skeleton';
 import Typography from 'components/typography/Typography';
 import AiAvatar from 'features/suggester-page/components/ai-avatar/AiAvatar';
 import styles from 'features/suggester-page/components/chat-message/ChatMessage.module.scss';
@@ -15,6 +16,7 @@ interface IChatMessageProps extends IChatMessage {
 
 export default function ChatMessage({
     id,
+    isLoading,
     userRole,
     text,
     className,
@@ -37,15 +39,21 @@ export default function ChatMessage({
         >
             {isAdmin && <AiAvatar className={styles['avatar']} />}
 
-            <Typography className={styles.text}>{text}</Typography>
+            {isLoading ? (
+                <Skeleton height={24} className={styles['text-skeleton']} />
+            ) : (
+                <Typography className={styles.text}>{text}</Typography>
+            )}
 
-            <IconButton
-                Icon={CloseIcon}
-                iconSize={30}
-                title="Remove message"
-                onClick={(): void => removeMessage(id)}
-                className={styles['remove-button']}
-            />
+            {!isLoading && (
+                <IconButton
+                    Icon={CloseIcon}
+                    iconSize={30}
+                    title="Remove message"
+                    onClick={(): void => removeMessage(id)}
+                    className={styles['remove-button']}
+                />
+            )}
         </div>
     );
 }

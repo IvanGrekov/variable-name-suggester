@@ -1,16 +1,16 @@
 @import 'styles/variables.scss';
 
 .skeleton {
-    --skeleton-color: rgb(var(--middle));
+    --skeleton-color: var(--middle-color);
     --loader-width: 60%;
 
     position: relative;
-    display: flex;
-    align-items: center;
     background-color: var(--skeleton-color);
     overflow: hidden;
+    border-radius: $border-radius;
 
-    &::before {
+    &::before,
+    &::after {
         content: '';
         position: absolute;
         top: 0;
@@ -21,11 +21,17 @@
         background: linear-gradient(
             90deg,
             var(--skeleton-color) 0%,
-            var(--background) 50%,
+            var(--foreground) 50%,
             var(--skeleton-color) 100%
         );
-        animation: loading 1.5s infinite linear;
-        border-radius: $border-radius;
+        animation-name: loading;
+        animation-duration: $base-animation-duration;
+        animation-timing-function: $base-animation-function;
+        animation-iteration-count: infinite;
+    }
+
+    &::after {
+        animation-delay: 700ms;
     }
 }
 
@@ -34,6 +40,6 @@
         left: calc(-1 * var(--loader-width));
     }
     100% {
-        left: calc(100% + var(--loader-width));
+        left: calc(2 * var(--loader-width));
     }
 }

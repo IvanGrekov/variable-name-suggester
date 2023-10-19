@@ -14,18 +14,15 @@
         background-color: var(--middle-color);
 
         .remove-button {
-            margin-left: $spacing-1;
-            background-color: var(--background-opacity);
-
             svg {
-                fill: var(--background);
+                fill: var(--middle-color);
             }
 
             &:hover,
             &:focus,
             &:focus-visible {
                 svg {
-                    fill: var(--middle-color);
+                    fill: var(--background);
                 }
             }
         }
@@ -39,8 +36,7 @@
         background-color: var(--foreground);
 
         .remove-button {
-            margin-left: $spacing-1;
-            background-color: var(--background);
+            background-color: var(--background-opacity);
 
             svg {
                 fill: var(--foreground);
@@ -75,6 +71,13 @@
     }
 }
 
+.text-skeleton {
+    flex-grow: 0.95;
+    justify-self: stretch;
+    flex-shrink: 0;
+    border-radius: $border-radius;
+}
+
 .text {
     transform: translateY(-0.05rem);
 
@@ -84,6 +87,8 @@
 }
 
 .remove-button {
+    background-color: var(--background-opacity);
+    margin-left: $spacing-1;
     padding: $spacing-2;
     border: none;
     opacity: 0;
@@ -97,5 +102,9 @@
     &:focus-visible {
         border: none;
         opacity: 1;
+    }
+
+    &--disabled {
+        background-color: var(--background-invisible);
     }
 }

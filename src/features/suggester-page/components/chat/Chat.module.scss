@@ -48,6 +48,10 @@
         opacity: 0;
     }
 
+    &--loading {
+        width: 85%;
+    }
+
     &--admin {
         animation-name: admin-message-appear;
 
