@@ -17,14 +17,6 @@
             svg {
                 fill: var(--middle-color);
             }
-
-            &:hover,
-            &:focus,
-            &:focus-visible {
-                svg {
-                    fill: var(--background);
-                }
-            }
         }
     }
 
@@ -40,14 +32,6 @@
 
             svg {
                 fill: var(--foreground);
-            }
-
-            &:hover,
-            &:focus,
-            &:focus-visible {
-                svg {
-                    fill: var(--middle-color);
-                }
             }
         }
     }
@@ -102,9 +86,9 @@
     &:focus-visible {
         border: none;
         opacity: 1;
-    }
 
-    &--disabled {
-        background-color: var(--background-invisible);
+        svg {
+            fill: var(--background);
+        }
     }
 }
