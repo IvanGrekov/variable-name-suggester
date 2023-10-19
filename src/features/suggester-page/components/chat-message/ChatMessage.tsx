@@ -2,6 +2,7 @@ import cx from 'classnames';
 
 import IconButton from 'components/button/IconButton';
 import CloseIcon from 'components/icons/CloseIcon';
+import RepeatIcon from 'components/icons/RepeatIcon';
 import Skeleton from 'components/skeleton/Skeleton';
 import Typography from 'components/typography/Typography';
 import AiAvatar from 'features/suggester-page/components/ai-avatar/AiAvatar';
@@ -16,6 +17,7 @@ interface IChatMessageProps extends IChatMessage {
 
 export default function ChatMessage({
     id,
+    isError,
     isLoading,
     userRole,
     text,
@@ -26,6 +28,8 @@ export default function ChatMessage({
     const isAdmin = getIsAdmin(userRole);
     const isUser = getIsUser(userRole);
 
+    const messageContent = isError ? 'Error happened. You can retry' : text;
+
     return (
         <div
             className={cx(
@@ -33,6 +37,7 @@ export default function ChatMessage({
                 {
                     [styles['message--admin']]: isAdmin,
                     [styles['message--user']]: isUser,
+                    [styles['message--error']]: isError,
                 },
                 className,
             )}
@@ -42,7 +47,23 @@ export default function ChatMessage({
             {isLoading ? (
                 <Skeleton height={24} className={styles['text-skeleton']} />
             ) : (
-                <Typography className={styles.text}>{text}</Typography>
+                <Typography
+                    className={cx(styles.text, {
+                        [styles['text--error']]: isError,
+                    })}
+                >
+                    {messageContent}
+                </Typography>
+            )}
+
+            {isError && (
+                <IconButton
+                    Icon={RepeatIcon}
+                    iconSize={30}
+                    title="Retry"
+                    // onClick={(): void => removeMessage(id)}
+                    className={styles['retry-button']}
+                />
             )}
 
             {!isLoading && (
