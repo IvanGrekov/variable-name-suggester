@@ -13,6 +13,7 @@ interface ISendButtonProps {
     value: string;
     isDisabled: boolean;
     error: string;
+    setOnRetry: (onRetry: VoidFunction) => void;
     setValue: (value: string) => void;
     setError: (error: string) => void;
 }
@@ -21,6 +22,7 @@ export default function SendButton({
     value,
     isDisabled,
     error,
+    setOnRetry,
     setValue,
     setError,
 }: ISendButtonProps): JSX.Element {
@@ -48,6 +50,11 @@ export default function SendButton({
             addSuggesterChatMessage({ text: value, userRole: EUserRole.USER });
             setValue('');
             setIsAnimation(true);
+            setOnRetry(() => {
+                return (): void => {
+                    console.log('retry', value);
+                };
+            });
             buttonRef.current?.blur();
         }
     };

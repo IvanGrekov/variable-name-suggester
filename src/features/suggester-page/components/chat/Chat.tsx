@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import cx from 'classnames';
 
@@ -15,6 +15,8 @@ interface IChatProps {
 
 export default function Chat({ areaValue }: IChatProps): JSX.Element {
     const listRef = useRef<HTMLDivElement>(null);
+
+    const [onRetry, setOnRetry] = useState<VoidFunction | undefined>(undefined);
 
     const chat = useSelectSuggesterChat();
 
@@ -41,6 +43,7 @@ export default function Chat({ areaValue }: IChatProps): JSX.Element {
                         <ChatMessage
                             key={id}
                             {...message}
+                            onRetry={onRetry}
                             className={cx(styles.message, {
                                 [styles['message--removing']]: isRemoving,
                                 [styles['message--loading']]: isLoading,
@@ -53,7 +56,10 @@ export default function Chat({ areaValue }: IChatProps): JSX.Element {
                 })}
             </div>
 
-            <SendMessageField className={styles['send-message-field']} />
+            <SendMessageField
+                setOnRetry={setOnRetry}
+                className={styles['send-message-field']}
+            />
         </div>
     );
 }

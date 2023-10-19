@@ -11,10 +11,12 @@ import { useIsFieldDisabled } from 'features/suggester-page/components/send-mess
 import { getIsValueTooLong } from 'features/suggester-page/components/send-message-field/utils';
 
 interface ISendMessageFieldProps {
+    setOnRetry: (onRetry: VoidFunction) => void;
     className?: string;
 }
 
 export default function SendMessageField({
+    setOnRetry,
     className,
 }: ISendMessageFieldProps): JSX.Element {
     const [value, setValue] = useState('');
@@ -57,6 +59,7 @@ export default function SendMessageField({
                 value={value}
                 isDisabled={isDisabled}
                 error={error}
+                setOnRetry={setOnRetry}
                 setValue={setValue}
                 setError={setError}
             />
