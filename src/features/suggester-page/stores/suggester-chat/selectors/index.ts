@@ -1,3 +1,4 @@
+import { IChatMessage } from '@/features/suggester-page/types/chat.types';
 import { useSuggesterChatStore } from 'features/suggester-page/stores/suggester-chat';
 import {
     ISuggesterChatState,
@@ -10,6 +11,14 @@ export const useSelectSuggesterChat = (): ISuggesterChatState['chat'] => {
     const chat = useSuggesterChatStore((state) => state.chat);
 
     return chat;
+};
+
+export const useSelectLastSuggesterChatMessage = ():
+    | IChatMessage
+    | undefined => {
+    const chat = useSuggesterChatStore((state) => state.chat);
+
+    return chat.at(-1);
 };
 
 export const useSelectIsSuggesterChatEmpty = (): boolean => {

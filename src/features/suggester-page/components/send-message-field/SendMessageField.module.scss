@@ -29,6 +29,10 @@
     background-color: transparent !important;
     color: var(--background);
 
+    &--disabled {
+        color: var(--background-invisible);
+    }
+
     &::after {
         background-color: transparent !important;
     }
@@ -44,6 +48,10 @@
     background-color: var(--background);
     transition: background-color $input-transition-duration
         $input-transition-function;
+
+    &--disabled {
+        background-color: var(--background-invisible);
+    }
 
     &--error {
         background-color: var(--red);
@@ -74,7 +82,15 @@
 
     &--disabled {
         svg {
-            fill: var(--background-opacity);
+            fill: var(--background-invisible);
+        }
+
+        &:hover,
+        &:focus,
+        &:focus-visible {
+            svg {
+                fill: var(--background-invisible);
+            }
         }
     }
 }

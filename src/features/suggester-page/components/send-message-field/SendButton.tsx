@@ -11,6 +11,7 @@ import { EUserRole } from 'types/user.types';
 
 interface ISendButtonProps {
     value: string;
+    isDisabled: boolean;
     error: string;
     setValue: (value: string) => void;
     setError: (error: string) => void;
@@ -18,6 +19,7 @@ interface ISendButtonProps {
 
 export default function SendButton({
     value,
+    isDisabled,
     error,
     setValue,
     setError,
@@ -55,10 +57,10 @@ export default function SendButton({
             ref={buttonRef}
             Icon={SendIcon}
             title="Send"
-            isDisabled={!!error}
+            isDisabled={!!error || isDisabled}
             onClick={onClick}
             className={cx(styles['send-button'], {
-                [styles['send-button--disabled']]: error,
+                [styles['send-button--disabled']]: error || isDisabled,
                 [styles['send-button--animation']]: isAnimation,
             })}
         />

@@ -6,17 +6,20 @@ import { MAX_MESSAGE_LENGTH } from 'features/suggester-page/components/send-mess
 
 interface ITextAreaCounterProps {
     valueLength: number;
+    isDisabled: boolean;
     error: string;
 }
 
 export default function TextAreaCounter({
     valueLength,
+    isDisabled,
     error,
 }: ITextAreaCounterProps): JSX.Element {
     return (
         <Typography
             variant="body2"
             className={cx(styles['text-area-counter'], {
+                [styles['text-area-counter--disabled']]: isDisabled,
                 [styles['text-area-counter--error']]: error,
             })}
         >

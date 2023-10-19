@@ -7,6 +7,7 @@ import SendButton from 'features/suggester-page/components/send-message-field/Se
 import styles from 'features/suggester-page/components/send-message-field/SendMessageField.module.scss';
 import TextAreaCounter from 'features/suggester-page/components/send-message-field/TextAreaCounter';
 import { MAX_MESSAGE_LENGTH } from 'features/suggester-page/components/send-message-field/constants';
+import { useIsFieldDisabled } from 'features/suggester-page/components/send-message-field/hooks';
 import { getIsValueTooLong } from 'features/suggester-page/components/send-message-field/utils';
 
 interface ISendMessageFieldProps {
@@ -27,6 +28,8 @@ export default function SendMessageField({
         }
     }, [value]);
 
+    const isDisabled = useIsFieldDisabled();
+
     return (
         <div className={cx(styles.area, className)}>
             <Textarea
@@ -35,16 +38,24 @@ export default function SendMessageField({
                 placeholder="Type your message here..."
                 rows={3}
                 isFullWidth={true}
+                disabled={isDisabled}
                 className={styles['text-area']}
-                placeholderClassName={styles['text-area-placeholder']}
+                placeholderClassName={cx(styles['text-area-placeholder'], {
+                    [styles['text-area-placeholder--disabled']]: isDisabled,
+                })}
                 labelClassName={styles['text-area-label']}
                 onChange={(e): void => setValue(e.target.value)}
             />
 
-            <TextAreaCounter valueLength={value.length} error={error} />
+            <TextAreaCounter
+                valueLength={value.length}
+                isDisabled={isDisabled}
+                error={error}
+            />
 
             <SendButton
                 value={value}
+                isDisabled={isDisabled}
                 error={error}
                 setValue={setValue}
                 setError={setError}

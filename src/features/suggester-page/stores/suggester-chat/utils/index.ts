@@ -32,7 +32,7 @@ export const mergeStates: TMergeStates = ({ prevStore, store }) => {
     const prevChat = prevStore.chat || [];
     const currentChat = store.chat;
     const chat = [...prevChat, ...currentChat].filter(
-        ({ isRemoving }) => !isRemoving,
+        ({ isRemoving, isLoading }) => !isRemoving && !isLoading,
     );
 
     return {
