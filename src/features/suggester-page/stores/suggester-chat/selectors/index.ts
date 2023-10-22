@@ -2,6 +2,8 @@ import { useSuggesterChatStore } from 'features/suggester-page/stores/suggester-
 import {
     ISuggesterChatState,
     TAddMessage,
+    TAddLoadingMessage,
+    TEditMessage,
     TRemoveMessage,
     TResetChat,
 } from 'features/suggester-page/stores/suggester-chat/types';
@@ -31,6 +33,21 @@ export const useSelectAddSuggesterChatMessage = (): TAddMessage => {
     const addMessage = useSuggesterChatStore((state) => state.addMessage);
 
     return addMessage;
+};
+
+export const useSelectAddLoadingSuggesterChatMessage =
+    (): TAddLoadingMessage => {
+        const addLoadingMessage = useSuggesterChatStore(
+            (state) => state.addLoadingMessage,
+        );
+
+        return addLoadingMessage;
+    };
+
+export const useSelectEditSuggesterChatMessage = (): TEditMessage => {
+    const editMessage = useSuggesterChatStore((state) => state.editMessage);
+
+    return editMessage;
 };
 
 export const useSelectRemoveSuggesterChatMessage = (): TRemoveMessage => {

@@ -24,6 +24,7 @@ export async function POST(request: NextRequest): Promise<Response> {
         ],
         model: 'gpt-3.5-turbo',
     });
+    const answer = completion.choices[0];
 
-    return Response.json(completion);
+    return Response.json(answer);
 }

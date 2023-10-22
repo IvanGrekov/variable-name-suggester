@@ -7,14 +7,12 @@ import {
     TTypographyElements,
     TTypographyVariants,
 } from 'components/typography/types';
-import { getLimitedText } from 'utils/string.utils';
 
 interface ITypographyProps {
     children: string;
     element?: TTypographyElements;
     variant?: TTypographyVariants;
     lineClamp?: number | 'none';
-    maxLength?: number;
     textOverflow?: 'ellipsis' | 'clip' | 'unset' | 'initial' | 'inherit';
     style?: CSSProperties;
     className?: string;
@@ -25,13 +23,11 @@ export default function Typography({
     element = 'p',
     variant = 'body1',
     lineClamp = 'none',
-    maxLength,
     textOverflow = 'ellipsis',
     style = {},
     className,
 }: ITypographyProps): JSX.Element {
     const Element = element;
-    const text = getLimitedText({ text: children, maxLength });
 
     return (
         <Element
@@ -48,8 +44,7 @@ export default function Typography({
                 textOverflow,
                 ...style,
             }}
-        >
-            {text}
-        </Element>
+            dangerouslySetInnerHTML={{ __html: children }}
+        />
     );
 }

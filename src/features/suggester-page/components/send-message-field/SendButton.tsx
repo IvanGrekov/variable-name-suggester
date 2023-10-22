@@ -1,14 +1,15 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import cx from 'classnames';
 
 import IconButton from 'components/button/IconButton';
 import SendIcon from 'components/icons/SendIcon';
-import { SHORT_ANIMATION_DURATION } from 'constants/animationDuration.constants';
 import styles from 'features/suggester-page/components/send-message-field/SendMessageField.module.scss';
-import { useSelectAddSuggesterChatMessage } from 'features/suggester-page/stores/suggester-chat/selectors';
+import {
+    useClearButtonAnimation,
+    useGetSubmit,
+} from 'features/suggester-page/components/send-message-field/hooks/sendButton.hooks';
 import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
-import { EUserRole } from 'types/user.types';
 
 interface ISendButtonProps {
     value: string;
@@ -25,47 +26,22 @@ export default function SendButton({
     areaValue,
     isDisabled,
     error,
-    setOnRetry,
     setValue,
     setError,
+    setOnRetry,
 }: ISendButtonProps): JSX.Element {
-    const buttonRef = useRef<HTMLButtonElement>(null);
     const [isAnimation, setIsAnimation] = useState(false);
 
-    const addSuggesterChatMessage = useSelectAddSuggesterChatMessage();
+    const { onSubmit, buttonRef } = useGetSubmit({
+        value,
+        areaValue,
+        setValue,
+        setError,
+        setOnRetry,
+        setIsAnimation,
+    });
 
-    useEffect(() => {
-        if (isAnimation) {
-            const timeout = setTimeout(() => {
-                setIsAnimation(false);
-            }, SHORT_ANIMATION_DURATION);
-
-            return (): void => {
-                clearTimeout(timeout);
-            };
-        }
-    }, [isAnimation]);
-
-    const onClick = (): void => {
-        if (!value) {
-            setError('Message is empty');
-        } else {
-            addSuggesterChatMessage({ text: value, userRole: EUserRole.USER });
-            setValue('');
-            setIsAnimation(true);
-            setOnRetry(() => {
-                return (): void => {
-                    console.log('retry', value);
-                };
-            });
-            buttonRef.current?.blur();
-
-            fetch('http://localhost:3001/api', {
-                method: 'POST',
-                body: JSON.stringify({ areaValue, prompt: value }),
-            });
-        }
-    };
+    useClearButtonAnimation({ isAnimation, setIsAnimation });
 
     return (
         <IconButton
@@ -73,7 +49,7 @@ export default function SendButton({
             Icon={SendIcon}
             title="Send"
             isDisabled={!!error || isDisabled}
-            onClick={onClick}
+            onClick={onSubmit}
             className={cx(styles['send-button'], {
                 [styles['send-button--disabled']]: error || isDisabled,
                 [styles['send-button--animation']]: isAnimation,

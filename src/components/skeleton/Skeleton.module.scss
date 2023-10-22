@@ -24,6 +24,7 @@
             var(--foreground) 50%,
             var(--skeleton-color) 100%
         );
+
         animation-name: loading;
         animation-duration: $base-animation-duration;
         animation-timing-function: $base-animation-function;
@@ -31,6 +32,7 @@
     }
 
     &::after {
+        left: calc(-1 * var(--loader-width));
         animation-delay: 700ms;
     }
 }

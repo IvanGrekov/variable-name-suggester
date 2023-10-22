@@ -58,4 +58,10 @@
             padding: $default-spacing-sm;
         }
     }
+
+    @media (max-width: $screen-sm) {
+        & > * {
+            padding: $default-spacing-xs;
+        }
+    }
 }

@@ -6,7 +6,10 @@ export interface ISuggesterChatState {
 }
 
 export type TAddMessage = (args: { text: string; userRole: EUserRole }) => void;
-export type TAddLoadingMessage = (args: { userRole: EUserRole }) => void;
+export type TAddLoadingMessage = (args: {
+    id: string;
+    userRole: EUserRole;
+}) => void;
 export type TRemoveMessage = (messageId: string) => void;
 export type TEditMessage = (
     args: Partial<IChatMessage> & {

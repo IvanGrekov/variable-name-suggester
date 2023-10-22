@@ -7,7 +7,7 @@ import SendButton from 'features/suggester-page/components/send-message-field/Se
 import styles from 'features/suggester-page/components/send-message-field/SendMessageField.module.scss';
 import TextAreaCounter from 'features/suggester-page/components/send-message-field/TextAreaCounter';
 import { MAX_MESSAGE_LENGTH } from 'features/suggester-page/components/send-message-field/constants';
-import { useIsFieldDisabled } from 'features/suggester-page/components/send-message-field/hooks';
+import { useIsFieldDisabled } from 'features/suggester-page/components/send-message-field/hooks/messageField.hooks';
 import { getIsValueTooLong } from 'features/suggester-page/components/send-message-field/utils';
 import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 

@@ -32,13 +32,16 @@ export const useSuggesterChatStore = create<TSuggesterChatStore>()(
                     });
                 },
 
-                addLoadingMessage: ({ userRole }): void => {
-                    const newMessage = createChatMessage({
-                        userRole,
-                        text: '',
-                    });
-                    newMessage.isLoading = true;
-                    const newChat = [...get().chat, newMessage];
+                addLoadingMessage: ({ id, userRole }): void => {
+                    const newChat = [
+                        ...get().chat,
+                        {
+                            id,
+                            userRole,
+                            text: '',
+                            isLoading: true,
+                        },
+                    ];
 
                     set({
                         chat: newChat,

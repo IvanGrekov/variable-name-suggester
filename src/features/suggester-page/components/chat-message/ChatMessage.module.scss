@@ -63,6 +63,7 @@
 
 .text {
     transform: translateY(-0.05rem);
+    white-space: pre-line;
 
     &--error {
         color: var(--error);

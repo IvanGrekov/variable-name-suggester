@@ -25,6 +25,10 @@
     @media (max-width: $screen-md) {
         padding: 0 $default-spacing-sm;
     }
+
+    @media (max-width: $screen-sm) {
+        padding: 0 $default-spacing-xs;
+    }
 }
 
 .container {
