@@ -34,18 +34,11 @@
         }
 
         &:hover,
+        &:focus,
+        &:focus-visible,
         &.button--active {
-            color: var(--foreground);
+            color: var(--hover);
             border-color: var(--hover);
-            background-color: var(--hover);
-
-            &.button--red {
-                border-color: var(--red);
-            }
-
-            &.button--green {
-                border-color: var(--green);
-            }
         }
     }
 

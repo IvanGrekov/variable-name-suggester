@@ -4,7 +4,7 @@ import {
     useSelectResetSuggesterChat,
     useSelectAddSuggesterChatMessage,
 } from 'features/suggester-page/stores/suggester-chat/selectors';
-import { TAreaFieldValue } from 'features/suggester-page/types/areaField';
+import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 import { useLocalStorage } from 'hooks/localStorage.hooks';
 import { EUserRole } from 'types/user.types';
 

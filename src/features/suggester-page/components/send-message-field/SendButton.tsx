@@ -7,10 +7,12 @@ import SendIcon from 'components/icons/SendIcon';
 import { SHORT_ANIMATION_DURATION } from 'constants/animationDuration.constants';
 import styles from 'features/suggester-page/components/send-message-field/SendMessageField.module.scss';
 import { useSelectAddSuggesterChatMessage } from 'features/suggester-page/stores/suggester-chat/selectors';
+import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 import { EUserRole } from 'types/user.types';
 
 interface ISendButtonProps {
     value: string;
+    areaValue: TAreaFieldValue;
     isDisabled: boolean;
     error: string;
     setOnRetry: (onRetry: VoidFunction) => void;
@@ -20,6 +22,7 @@ interface ISendButtonProps {
 
 export default function SendButton({
     value,
+    areaValue,
     isDisabled,
     error,
     setOnRetry,
@@ -56,6 +59,11 @@ export default function SendButton({
                 };
             });
             buttonRef.current?.blur();
+
+            fetch('http://localhost:3001/api', {
+                method: 'POST',
+                body: JSON.stringify({ areaValue, prompt: value }),
+            });
         }
     };
 

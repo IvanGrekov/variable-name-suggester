@@ -1,4 +1,4 @@
-import { IChatMessage } from '@/features/suggester-page/types/chat.types';
+import { IChatMessage } from 'features/suggester-page/types/chat.types';
 import { EUserRole } from 'types/user.types';
 
 export interface ISuggesterChatState {

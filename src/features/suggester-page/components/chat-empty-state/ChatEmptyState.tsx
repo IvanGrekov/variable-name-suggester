@@ -2,7 +2,7 @@ import cx from 'classnames';
 
 import Typography from 'components/typography/Typography';
 import styles from 'features/suggester-page/components/chat-empty-state/ChatEmptyState.module.scss';
-import { TAreaFieldValue } from 'features/suggester-page/types/areaField';
+import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 
 interface ISuggesterChatEmptyStateProps {
     areaValue: TAreaFieldValue;

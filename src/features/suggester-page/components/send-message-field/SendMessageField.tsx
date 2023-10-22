@@ -9,15 +9,18 @@ import TextAreaCounter from 'features/suggester-page/components/send-message-fie
 import { MAX_MESSAGE_LENGTH } from 'features/suggester-page/components/send-message-field/constants';
 import { useIsFieldDisabled } from 'features/suggester-page/components/send-message-field/hooks';
 import { getIsValueTooLong } from 'features/suggester-page/components/send-message-field/utils';
+import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 
 interface ISendMessageFieldProps {
-    setOnRetry: (onRetry: VoidFunction) => void;
+    areaValue: TAreaFieldValue;
     className?: string;
+    setOnRetry: (onRetry: VoidFunction) => void;
 }
 
 export default function SendMessageField({
-    setOnRetry,
+    areaValue,
     className,
+    setOnRetry,
 }: ISendMessageFieldProps): JSX.Element {
     const [value, setValue] = useState('');
     const [error, setError] = useState('');
@@ -57,6 +60,7 @@ export default function SendMessageField({
 
             <SendButton
                 value={value}
+                areaValue={areaValue}
                 isDisabled={isDisabled}
                 error={error}
                 setOnRetry={setOnRetry}
