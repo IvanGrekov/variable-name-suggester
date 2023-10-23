@@ -4,8 +4,10 @@ import API from 'features/suggester-page/api';
 import {
     useSelectAddLoadingSuggesterChatMessage,
     useSelectEditSuggesterChatMessage,
+    useSelectSuggesterChatCounter,
 } from 'features/suggester-page/stores/suggester-chat/selectors';
 import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
+import { useAddErrorMessageToNotifications } from 'hooks/notifications.hooks';
 import { EUserRole } from 'types/user.types';
 
 type TUSeSendSuggesterRequest = () => (args: {
@@ -18,6 +20,8 @@ type TUSeSendSuggesterRequest = () => (args: {
 export const useSendSuggesterRequest: TUSeSendSuggesterRequest = () => {
     const addLoadingMessage = useSelectAddLoadingSuggesterChatMessage();
     const editMessage = useSelectEditSuggesterChatMessage();
+    const increaseChatCounter = useSelectSuggesterChatCounter();
+    const addErrorMessageToNotifications = useAddErrorMessageToNotifications();
 
     return async ({ areaValue, messageId, prompt, callback }) => {
         callback?.();
@@ -40,23 +44,31 @@ export const useSendSuggesterRequest: TUSeSendSuggesterRequest = () => {
             });
         }
 
-        const { data, status } = await API.post('', {
-            areaValue,
-            prompt,
-        });
-
-        if (status === 200) {
-            editMessage({
-                id: adminMessageId,
-                text: data.message.content,
-                isLoading: false,
+        try {
+            const { data, status } = await API.post('', {
+                areaValue,
+                prompt,
             });
-        } else {
-            editMessage({
-                id: adminMessageId,
-                text: '',
-                isLoading: false,
-                isError: true,
+
+            if (status === 200) {
+                editMessage({
+                    id: adminMessageId,
+                    text: data.message.content,
+                    isLoading: false,
+                });
+            } else {
+                editMessage({
+                    id: adminMessageId,
+                    text: '',
+                    isLoading: false,
+                    isError: true,
+                });
+            }
+
+            increaseChatCounter();
+        } catch (error) {
+            addErrorMessageToNotifications({
+                message: error.message,
             });
         }
     };

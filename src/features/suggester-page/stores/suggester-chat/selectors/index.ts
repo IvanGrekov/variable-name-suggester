@@ -1,12 +1,13 @@
 import { useSuggesterChatStore } from 'features/suggester-page/stores/suggester-chat';
 import {
     ISuggesterChatState,
+    TSetIsFullVersion,
+    TIncreaseCounter,
     TAddMessage,
     TAddLoadingMessage,
     TEditMessage,
     TRemoveMessage,
     TResetChat,
-    TSetIsFullVersion,
 } from 'features/suggester-page/stores/suggester-chat/types';
 import { IChatMessage } from 'features/suggester-page/types/chat.types';
 
@@ -16,12 +17,20 @@ export const useSelectSuggesterChat = (): ISuggesterChatState['chat'] => {
     return chat;
 };
 
-export const useSelectSuggesterChatCounter =
+export const useSelectIncreaseChatCounter =
     (): ISuggesterChatState['counter'] => {
         const counter = useSuggesterChatStore((state) => state.counter);
 
         return counter;
     };
+
+export const useSelectSuggesterChatCounter = (): TIncreaseCounter => {
+    const increaseCounter = useSuggesterChatStore(
+        (state) => state.increaseCounter,
+    );
+
+    return increaseCounter;
+};
 
 export const useSelectIsFullSuggesterVersion =
     (): ISuggesterChatState['isFullVersion'] => {

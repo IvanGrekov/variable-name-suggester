@@ -7,6 +7,7 @@ export interface ISuggesterChatState {
     isFullVersion: boolean;
 }
 
+export type TIncreaseCounter = () => void;
 export type TAddMessage = (args: { text: string; userRole: EUserRole }) => void;
 export type TAddLoadingMessage = (args: {
     id: string;
@@ -22,12 +23,13 @@ export type TResetChat = () => void;
 export type TSetIsFullVersion = (value: boolean) => void;
 
 interface ISuggesterChatActions {
+    increaseCounter: TIncreaseCounter;
+    setIsFullVersion: TSetIsFullVersion;
     addMessage: TAddMessage;
     addLoadingMessage: TAddLoadingMessage;
     removeMessage: TRemoveMessage;
     editMessage: TEditMessage;
     resetChat: TResetChat;
-    setIsFullVersion: TSetIsFullVersion;
 }
 
 export type TSuggesterChatStore = ISuggesterChatState & ISuggesterChatActions;
