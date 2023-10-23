@@ -3,13 +3,41 @@ import { useRef, useState, useEffect, RefObject } from 'react';
 import { IModalBaseProps } from 'components/modal/types';
 import { useAppTabsContext } from 'contexts/AppTabsContext';
 import { EAppTabs } from 'features/app-tabs/types/appTabs.types';
-import { useSelectSuggesterChat } from 'features/suggester-page/stores/suggester-chat/selectors';
+import { scrollToListBottom } from 'features/suggester-page/components/chat/utils';
+import {
+    useSelectSuggesterChat,
+    useSelectLastSuggesterChatMessage,
+} from 'features/suggester-page/stores/suggester-chat/selectors';
 import { EUserRole } from 'types/user.types';
 
-const useGetIsLastMessageFromUser = (): boolean => {
+export const useBottomChatScroll = (
+    listRef: RefObject<HTMLDivElement>,
+): void => {
     const chat = useSelectSuggesterChat();
+    const currentLength = useRef(chat.length);
 
-    return chat.at(-1)?.userRole === EUserRole.USER;
+    useEffect(() => {
+        scrollToListBottom(listRef);
+    }, [listRef]);
+
+    useEffect(() => {
+        const newLength = chat.length;
+
+        if (newLength > currentLength.current) {
+            scrollToListBottom(listRef);
+        }
+
+        currentLength.current = chat.length;
+    }, [listRef, chat]);
+};
+
+const useGetIsLastMessageFromUser = (): boolean => {
+    const lastMessage = useSelectLastSuggesterChatMessage();
+
+    const isFromUser = lastMessage?.userRole === EUserRole.USER;
+    const isTextEmpty = !lastMessage?.text;
+
+    return Boolean(isFromUser && !isTextEmpty);
 };
 
 export const useGetResponseModal = (): IModalBaseProps => {
@@ -34,19 +62,4 @@ export const useGetResponseModal = (): IModalBaseProps => {
     }, [currentTab]);
 
     return { isOpen, onClose: () => setIsOpen(false) };
-};
-
-export const useBottomChatScroll = (
-    listRef: RefObject<HTMLDivElement>,
-): void => {
-    const chat = useSelectSuggesterChat();
-
-    useEffect(() => {
-        if (listRef.current) {
-            listRef.current.scroll({
-                top: listRef.current.scrollHeight,
-                behavior: 'smooth',
-            });
-        }
-    }, [listRef, chat]);
 };

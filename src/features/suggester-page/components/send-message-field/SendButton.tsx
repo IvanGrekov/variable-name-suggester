@@ -16,7 +16,6 @@ interface ISendButtonProps {
     areaValue: TAreaFieldValue;
     isDisabled: boolean;
     error: string;
-    setOnRetry: (onRetry: VoidFunction) => void;
     setValue: (value: string) => void;
     setError: (error: string) => void;
 }
@@ -28,7 +27,6 @@ export default function SendButton({
     error,
     setValue,
     setError,
-    setOnRetry,
 }: ISendButtonProps): JSX.Element {
     const [isAnimation, setIsAnimation] = useState(false);
 
@@ -37,7 +35,6 @@ export default function SendButton({
         areaValue,
         setValue,
         setError,
-        setOnRetry,
         setIsAnimation,
     });
 

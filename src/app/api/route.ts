@@ -26,5 +26,5 @@ export async function POST(request: NextRequest): Promise<Response> {
     });
     const answer = completion.choices[0];
 
-    return Response.json(answer);
+    return Response.json(answer, { status: 200 });
 }

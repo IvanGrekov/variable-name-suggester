@@ -13,7 +13,6 @@ import { getIsAdmin, getIsUser } from 'utils/userRole.utils';
 
 interface IChatMessageProps extends IChatMessage {
     className?: string;
-    onRetry?: VoidFunction;
 }
 
 export default function ChatMessage({
@@ -23,7 +22,6 @@ export default function ChatMessage({
     userRole,
     text,
     className,
-    onRetry,
 }: IChatMessageProps): JSX.Element {
     const removeMessage = useSelectRemoveSuggesterChatMessage();
 
@@ -63,7 +61,7 @@ export default function ChatMessage({
                     Icon={RepeatIcon}
                     iconSize={30}
                     title="Retry"
-                    onClick={onRetry}
+                    // onClick={onRetry}
                     className={styles['retry-button']}
                 />
             )}

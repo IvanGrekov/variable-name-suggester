@@ -14,13 +14,11 @@ import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 interface ISendMessageFieldProps {
     areaValue: TAreaFieldValue;
     className?: string;
-    setOnRetry: (onRetry: VoidFunction) => void;
 }
 
 export default function SendMessageField({
     areaValue,
     className,
-    setOnRetry,
 }: ISendMessageFieldProps): JSX.Element {
     const [value, setValue] = useState('');
     const [error, setError] = useState('');
@@ -63,7 +61,6 @@ export default function SendMessageField({
                 areaValue={areaValue}
                 isDisabled={isDisabled}
                 error={error}
-                setOnRetry={setOnRetry}
                 setValue={setValue}
                 setError={setError}
             />
