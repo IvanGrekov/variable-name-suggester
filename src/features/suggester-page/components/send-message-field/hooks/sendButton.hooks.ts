@@ -1,4 +1,4 @@
-import { useEffect, useRef, RefObject } from 'react';
+import { useEffect, RefObject } from 'react';
 
 import { SHORT_ANIMATION_DURATION } from 'constants/animationDuration.constants';
 import { useSendSuggesterRequest } from 'features/suggester-page/hooks/suggesterApi.hooks';
@@ -31,27 +31,23 @@ export const useClearButtonAnimation: TUseClearButtonAnimation = ({
 };
 
 type TUseGetSubmit = (args: {
+    buttonRef: RefObject<HTMLButtonElement>;
     value: string;
     areaValue: TAreaFieldValue;
     setValue: (value: string) => void;
     setError: (error: string) => void;
     setIsAnimation: (isAnimation: boolean) => void;
-}) => {
-    onSubmit: VoidFunction;
-    buttonRef: RefObject<HTMLButtonElement>;
-};
+}) => VoidFunction;
 
 export const useGetSubmit: TUseGetSubmit = ({
+    buttonRef,
     value,
     areaValue,
     setValue,
     setError,
     setIsAnimation,
 }) => {
-    const buttonRef = useRef<HTMLButtonElement>(null);
-
     const addMessage = useSelectAddSuggesterChatMessage();
-
     const sendSuggesterRequest = useSendSuggesterRequest();
 
     const callback = (): void => {
@@ -60,7 +56,7 @@ export const useGetSubmit: TUseGetSubmit = ({
         setIsAnimation(true);
     };
 
-    const onSubmit = (): void => {
+    return () => {
         if (!value) {
             setError('Message is empty');
 
@@ -69,10 +65,5 @@ export const useGetSubmit: TUseGetSubmit = ({
 
         addMessage({ text: value, userRole: EUserRole.USER });
         sendSuggesterRequest({ areaValue, prompt: value, callback });
-    };
-
-    return {
-        onSubmit,
-        buttonRef,
     };
 };

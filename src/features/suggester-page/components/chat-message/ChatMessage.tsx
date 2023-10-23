@@ -53,6 +53,7 @@ export default function ChatMessage({
                 <Skeleton height={24} className={styles['text-skeleton']} />
             ) : (
                 <Typography
+                    textOverflow="unset"
                     className={cx(styles.text, {
                         [styles['text--error']]: isError,
                     })}

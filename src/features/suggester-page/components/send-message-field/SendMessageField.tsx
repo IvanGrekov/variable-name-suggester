@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import cx from 'classnames';
 
@@ -20,6 +20,8 @@ export default function SendMessageField({
     areaValue,
     className,
 }: ISendMessageFieldProps): JSX.Element {
+    const sendButtonRef = useRef<HTMLButtonElement>(null);
+
     const [value, setValue] = useState('');
     const [error, setError] = useState('');
 
@@ -48,6 +50,12 @@ export default function SendMessageField({
                 })}
                 labelClassName={styles['text-area-label']}
                 onChange={(e): void => setValue(e.target.value)}
+                onKeyDown={(e): void => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendButtonRef.current?.click();
+                    }
+                }}
             />
 
             <TextAreaCounter
@@ -57,6 +65,7 @@ export default function SendMessageField({
             />
 
             <SendButton
+                buttonRef={sendButtonRef}
                 value={value}
                 areaValue={areaValue}
                 isDisabled={isDisabled}

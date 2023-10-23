@@ -36,8 +36,8 @@ export const mergeStates: TMergeStates = ({ prevStore, store }) => {
     );
 
     return {
-        ...prevStore,
         ...store,
+        ...prevStore,
         chat,
     };
 };

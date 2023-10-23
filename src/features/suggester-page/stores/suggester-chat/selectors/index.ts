@@ -6,6 +6,7 @@ import {
     TEditMessage,
     TRemoveMessage,
     TResetChat,
+    TSetIsFullVersion,
 } from 'features/suggester-page/stores/suggester-chat/types';
 import { IChatMessage } from 'features/suggester-page/types/chat.types';
 
@@ -13,6 +14,30 @@ export const useSelectSuggesterChat = (): ISuggesterChatState['chat'] => {
     const chat = useSuggesterChatStore((state) => state.chat);
 
     return chat;
+};
+
+export const useSelectSuggesterChatCounter =
+    (): ISuggesterChatState['counter'] => {
+        const counter = useSuggesterChatStore((state) => state.counter);
+
+        return counter;
+    };
+
+export const useSelectIsFullSuggesterVersion =
+    (): ISuggesterChatState['isFullVersion'] => {
+        const isFullVersion = useSuggesterChatStore(
+            (state) => state.isFullVersion,
+        );
+
+        return isFullVersion;
+    };
+
+export const useSelectSetIsFullSuggesterVersion = (): TSetIsFullVersion => {
+    const setIsFullVersion = useSuggesterChatStore(
+        (state) => state.setIsFullVersion,
+    );
+
+    return setIsFullVersion;
 };
 
 export const useSelectLastSuggesterChatMessage = ():

@@ -12,9 +12,12 @@ import {
     filterMessages,
     mergeStates,
 } from 'features/suggester-page/stores/suggester-chat/utils';
+import { EUserRole } from 'types/user.types';
 
 const initialSuggesterChatState: ISuggesterChatState = {
     chat: [],
+    counter: 0,
+    isFullVersion: false,
 };
 
 export const useSuggesterChatStore = create<TSuggesterChatStore>()(
@@ -26,9 +29,15 @@ export const useSuggesterChatStore = create<TSuggesterChatStore>()(
                 addMessage: (args): void => {
                     const newMessage = createChatMessage(args);
                     const newChat = [...get().chat, newMessage];
+                    let newCounter = get().counter;
+
+                    if (newMessage.userRole === EUserRole.USER) {
+                        newCounter += 1;
+                    }
 
                     set({
                         chat: newChat,
+                        counter: newCounter,
                     });
                 },
 
@@ -83,7 +92,15 @@ export const useSuggesterChatStore = create<TSuggesterChatStore>()(
                 },
 
                 resetChat: (): void => {
-                    set(initialSuggesterChatState);
+                    set({
+                        chat: initialSuggesterChatState.chat,
+                    });
+                },
+
+                setIsFullVersion: (value): void => {
+                    set({
+                        isFullVersion: value,
+                    });
                 },
             }),
             {

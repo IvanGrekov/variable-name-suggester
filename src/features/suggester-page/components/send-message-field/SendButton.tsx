@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, RefObject } from 'react';
 
 import cx from 'classnames';
 
@@ -12,6 +12,7 @@ import {
 import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 
 interface ISendButtonProps {
+    buttonRef: RefObject<HTMLButtonElement>;
     value: string;
     areaValue: TAreaFieldValue;
     isDisabled: boolean;
@@ -21,6 +22,7 @@ interface ISendButtonProps {
 }
 
 export default function SendButton({
+    buttonRef,
     value,
     areaValue,
     isDisabled,
@@ -30,7 +32,8 @@ export default function SendButton({
 }: ISendButtonProps): JSX.Element {
     const [isAnimation, setIsAnimation] = useState(false);
 
-    const { onSubmit, buttonRef } = useGetSubmit({
+    const onSubmit = useGetSubmit({
+        buttonRef,
         value,
         areaValue,
         setValue,

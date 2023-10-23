@@ -5,17 +5,24 @@ import styles from 'features/suggester-page/components/chat-empty-state/ChatEmpt
 import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 
 interface ISuggesterChatEmptyStateProps {
-    areaValue: TAreaFieldValue;
+    areaValue?: TAreaFieldValue;
+    customTitle?: string;
+    customDescription?: string;
+    action?: JSX.Element;
     className?: string;
 }
 
 export default function SuggesterChatEmptyState({
     areaValue,
+    customTitle,
+    customDescription,
+    action,
     className,
 }: ISuggesterChatEmptyStateProps): JSX.Element {
-    const description = areaValue.length
+    const defaultDescription = areaValue?.length
         ? 'Ask away to get personalized suggestions!'
         : 'Please select at least one area of interest!';
+    const description = customDescription ?? defaultDescription;
 
     return (
         <div className={cx(styles['empty-state'], className)}>
@@ -24,12 +31,16 @@ export default function SuggesterChatEmptyState({
                 variant="subtitle2"
                 className={styles.title}
             >
-                No messages here...
+                {customTitle ?? 'No messages here...'}
             </Typography>
 
-            <Typography className={styles.description}>
-                {description}
-            </Typography>
+            {description && (
+                <Typography className={styles.description}>
+                    {customDescription ?? description}
+                </Typography>
+            )}
+
+            {action && <div className={styles.action}>{action}</div>}
         </div>
     );
 }
