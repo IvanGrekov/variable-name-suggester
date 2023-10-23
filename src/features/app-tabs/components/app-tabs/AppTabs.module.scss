@@ -61,7 +61,7 @@
 
     @media (max-width: $screen-sm) {
         & > * {
-            padding: $default-spacing-xs;
+            padding: $default-spacing-sm $default-spacing-xs;
         }
     }
 }

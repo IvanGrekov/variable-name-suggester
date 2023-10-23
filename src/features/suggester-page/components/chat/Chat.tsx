@@ -5,7 +5,7 @@ import cx from 'classnames';
 import styles from 'features/suggester-page/components/chat/Chat.module.scss';
 import {
     useBottomChatScroll,
-    useGetResponseModal,
+    useResponseModal,
 } from 'features/suggester-page/components/chat/hooks';
 import ChatMessage from 'features/suggester-page/components/chat-message/ChatMessage';
 import ResponseModal from 'features/suggester-page/components/response-modal/ResponseModal';
@@ -25,7 +25,7 @@ export default function Chat({ areaValue }: IChatProps): JSX.Element {
 
     useBottomChatScroll(listRef);
 
-    const responseModalProps = useGetResponseModal();
+    const responseModalProps = useResponseModal();
 
     return (
         <>

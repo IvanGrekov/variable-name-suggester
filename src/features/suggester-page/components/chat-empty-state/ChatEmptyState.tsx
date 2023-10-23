@@ -40,7 +40,7 @@ export default function SuggesterChatEmptyState({
                 </Typography>
             )}
 
-            {action && <div className={styles.action}>{action}</div>}
+            {action && <div className={styles['action-wrapper']}>{action}</div>}
         </div>
     );
 }

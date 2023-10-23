@@ -40,7 +40,7 @@ const useGetIsLastMessageFromUser = (): boolean => {
     return Boolean(isFromUser && !isTextEmpty);
 };
 
-export const useGetResponseModal = (): IModalBaseProps => {
+export const useResponseModal = (): IModalBaseProps => {
     const isLastMessageFromUser = useGetIsLastMessageFromUser();
     const shouldShowModal = useRef(isLastMessageFromUser);
 

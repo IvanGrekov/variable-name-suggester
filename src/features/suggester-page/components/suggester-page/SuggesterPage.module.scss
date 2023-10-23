@@ -16,3 +16,13 @@
     transform: translate(-50%, -50%);
     box-shadow: var(--box-shadow-md);
 }
+
+.get-full-button {
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        color: var(--background);
+        background-color: var(--foreground);
+        border-color: var(--foreground);
+    }
+}
