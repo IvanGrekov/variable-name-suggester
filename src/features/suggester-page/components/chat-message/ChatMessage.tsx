@@ -7,11 +7,14 @@ import Skeleton from 'components/skeleton/Skeleton';
 import Typography from 'components/typography/Typography';
 import AiAvatar from 'features/suggester-page/components/ai-avatar/AiAvatar';
 import styles from 'features/suggester-page/components/chat-message/ChatMessage.module.scss';
+import { useOnRetry } from 'features/suggester-page/components/chat-message/hooks';
 import { useSelectRemoveSuggesterChatMessage } from 'features/suggester-page/stores/suggester-chat/selectors';
+import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 import { IChatMessage } from 'features/suggester-page/types/chat.types';
 import { getIsAdmin, getIsUser } from 'utils/userRole.utils';
 
 interface IChatMessageProps extends IChatMessage {
+    areaValue: TAreaFieldValue;
     className?: string;
 }
 
@@ -21,9 +24,11 @@ export default function ChatMessage({
     isLoading,
     userRole,
     text,
+    areaValue,
     className,
 }: IChatMessageProps): JSX.Element {
     const removeMessage = useSelectRemoveSuggesterChatMessage();
+    const onRetry = useOnRetry({ id, areaValue });
 
     const isAdmin = getIsAdmin(userRole);
     const isUser = getIsUser(userRole);
@@ -61,7 +66,7 @@ export default function ChatMessage({
                     Icon={RepeatIcon}
                     iconSize={30}
                     title="Retry"
-                    // onClick={onRetry}
+                    onClick={onRetry}
                     className={styles['retry-button']}
                 />
             )}

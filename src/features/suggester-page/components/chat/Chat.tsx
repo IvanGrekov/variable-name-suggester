@@ -42,6 +42,7 @@ export default function Chat({ areaValue }: IChatProps): JSX.Element {
                             <ChatMessage
                                 key={id}
                                 {...message}
+                                areaValue={areaValue}
                                 className={cx(styles.message, {
                                     [styles['message--removing']]: isRemoving,
                                     [styles['message--loading']]: isLoading,

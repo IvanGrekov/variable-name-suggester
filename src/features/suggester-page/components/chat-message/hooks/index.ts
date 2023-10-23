@@ -1,23 +1,24 @@
+import { getLastUserCharMessage } from 'features/suggester-page/components/chat-message/utils';
 import { useSendSuggesterRequest } from 'features/suggester-page/hooks/suggesterApi.hooks';
-import { useSelectLastSuggesterChatMessage } from 'features/suggester-page/stores/suggester-chat/selectors';
+import { useSelectSuggesterChat } from 'features/suggester-page/stores/suggester-chat/selectors';
 import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 import { useAddErrorMessageToNotifications } from 'hooks/notifications.hooks';
 
-type TUseGetSubmit = (args: {
+type TUseOnRetry = (args: {
+    id: string;
     areaValue: TAreaFieldValue;
-    onClose: VoidFunction;
 }) => VoidFunction;
 
-export const useGetSubmit: TUseGetSubmit = ({ areaValue, onClose }) => {
-    const lastChatMessage = useSelectLastSuggesterChatMessage();
+export const useOnRetry: TUseOnRetry = ({ id, areaValue }) => {
+    const chat = useSelectSuggesterChat();
     const sendSuggesterRequest = useSendSuggesterRequest();
     const addErrorMessageToNotifications = useAddErrorMessageToNotifications();
 
     return () => {
-        const prompt = lastChatMessage?.text;
+        const lastUserMessage = getLastUserCharMessage(chat);
+        const { text } = lastUserMessage || {};
 
-        if (!prompt) {
-            onClose();
+        if (!text) {
             addErrorMessageToNotifications({
                 message: 'There is no any prompt from you to send',
             });
@@ -26,9 +27,9 @@ export const useGetSubmit: TUseGetSubmit = ({ areaValue, onClose }) => {
         }
 
         sendSuggesterRequest({
+            messageId: id,
             areaValue,
-            prompt,
-            callback: onClose,
+            prompt: text,
         });
     };
 };
