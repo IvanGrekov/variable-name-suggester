@@ -1,1 +1,1 @@
-export const TRIAL_COUNT = 3;
+export const TRIAL_COUNT = 10;
