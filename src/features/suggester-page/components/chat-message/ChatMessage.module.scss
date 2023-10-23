@@ -69,13 +69,14 @@
     overflow: auto;
     transform: translateY(-0.05rem);
     white-space: pre-line;
+    text-wrap: pretty;
 
     &--error {
         color: var(--error);
     }
 
-    @media (max-width: $screen-sm) {
-        text-wrap: pretty;
+    @media (max-width: $screen-md) {
+        font-size: 0.875rem;
     }
 }
 
