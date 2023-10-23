@@ -17,14 +17,14 @@ export const useSelectSuggesterChat = (): ISuggesterChatState['chat'] => {
     return chat;
 };
 
-export const useSelectIncreaseChatCounter =
+export const useSelectSuggesterChatCounter =
     (): ISuggesterChatState['counter'] => {
         const counter = useSuggesterChatStore((state) => state.counter);
 
         return counter;
     };
 
-export const useSelectSuggesterChatCounter = (): TIncreaseCounter => {
+export const useSelectIncreaseChatCounter = (): TIncreaseCounter => {
     const increaseCounter = useSuggesterChatStore(
         (state) => state.increaseCounter,
     );
