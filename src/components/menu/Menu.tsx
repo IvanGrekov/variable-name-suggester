@@ -12,6 +12,7 @@ import { useBodyScrollLock } from 'hooks/scroll.hooks';
 export default function Menu({
     children,
     OpenMenuElement,
+    hideTooltip,
     tooltipPosition,
     tooltipClassName,
     actionsClassName,
@@ -31,16 +32,24 @@ export default function Menu({
             }}
         >
             <div className={styles.menu} onClick={onDeactivate}>
-                <Tooltip
-                    text="Open Menu"
-                    open={!isOpen}
-                    position={tooltipPosition}
-                    className={tooltipClassName}
-                >
-                    {OpenMenuElementWithOnClick || (
-                        <IconButton Icon={MoreIcon} onClick={onClick} />
-                    )}
-                </Tooltip>
+                {hideTooltip ? (
+                    <>
+                        {OpenMenuElementWithOnClick || (
+                            <IconButton Icon={MoreIcon} onClick={onClick} />
+                        )}
+                    </>
+                ) : (
+                    <Tooltip
+                        text="Open Menu"
+                        open={!isOpen}
+                        position={tooltipPosition}
+                        className={tooltipClassName}
+                    >
+                        {OpenMenuElementWithOnClick || (
+                            <IconButton Icon={MoreIcon} onClick={onClick} />
+                        )}
+                    </Tooltip>
+                )}
 
                 {!!OpenMenuElementWithOnClick && (
                     <button

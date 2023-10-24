@@ -12,11 +12,12 @@ export type TMenuActionItemProps = Pick<
 
 type TElement = ReactElement<
     TMenuActionItemProps | IDividerProps | ISpacingProps
->;
+> | null;
 
 export interface IMenuProps {
     children: TElement | Array<TElement>;
     OpenMenuElement?: JSX.Element;
+    hideTooltip?: boolean;
     tooltipPosition?: TTooltipPosition;
     tooltipClassName?: string;
     actionsClassName?: string;

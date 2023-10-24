@@ -21,6 +21,7 @@ export interface IButtonProps extends IBaseButtonProps {
     textVariant?: TTypographyVariants;
     isLoading?: boolean;
     Icon?: (props: IIconProps) => JSX.Element;
+    iconSize?: IIconProps['size'];
     style?: CSSProperties;
     className?: string;
     color?: 'red' | 'green' | 'primary';

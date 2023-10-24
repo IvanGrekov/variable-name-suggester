@@ -7,13 +7,14 @@ import Skeleton from 'components/skeleton/Skeleton';
 import Typography from 'components/typography/Typography';
 import AiAvatar from 'features/suggester-page/components/ai-avatar/AiAvatar';
 import styles from 'features/suggester-page/components/chat-message/ChatMessage.module.scss';
+import MessageMenu from 'features/suggester-page/components/chat-message/MessageMenu';
 import { useOnRetry } from 'features/suggester-page/components/chat-message/hooks';
 import { useSelectRemoveSuggesterChatMessage } from 'features/suggester-page/stores/suggester-chat/selectors';
 import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 import { IChatMessage } from 'features/suggester-page/types/chat.types';
 import { getIsAdmin, getIsUser } from 'utils/userRole.utils';
 
-interface IChatMessageProps extends IChatMessage {
+export interface IChatMessageProps extends IChatMessage {
     areaValue: TAreaFieldValue;
     className?: string;
 }
@@ -29,6 +30,7 @@ export default function ChatMessage({
 }: IChatMessageProps): JSX.Element {
     const removeMessage = useSelectRemoveSuggesterChatMessage();
     const onRetry = useOnRetry({ id, areaValue });
+    const onRemove = (): void => removeMessage(id);
 
     const isAdmin = getIsAdmin(userRole);
     const isUser = getIsUser(userRole);
@@ -64,9 +66,9 @@ export default function ChatMessage({
 
             {isError && (
                 <IconButton
+                    title="Retry"
                     Icon={RepeatIcon}
                     iconSize={30}
-                    title="Retry"
                     onClick={onRetry}
                     className={styles['retry-button']}
                 />
@@ -74,13 +76,23 @@ export default function ChatMessage({
 
             {!isLoading && (
                 <IconButton
+                    title="Remove message"
                     Icon={CloseIcon}
                     iconSize={30}
-                    title="Remove message"
-                    onClick={(): void => removeMessage(id)}
+                    onClick={onRemove}
                     className={styles['remove-button']}
                 />
             )}
+
+            <MessageMenu
+                id={id}
+                isAdmin={isAdmin}
+                isUser={isUser}
+                isLoading={isLoading}
+                isError={isError}
+                onRetry={onRetry}
+                onRemove={onRemove}
+            />
         </div>
     );
 }

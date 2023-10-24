@@ -11,6 +11,7 @@
 
     @media (max-width: $screen-md) {
         padding: $spacing-1 $spacing-4;
+        padding-right: $spacing-0-5;
     }
 
     &--admin {
@@ -23,6 +24,12 @@
                 fill: var(--middle-color);
             }
         }
+
+        .open-menu-button {
+            svg {
+                fill: var(--foreground);
+            }
+        }
     }
 
     &--user {
@@ -31,6 +38,12 @@
         padding-left: $spacing-4;
         border-bottom-right-radius: 0;
         background-color: var(--foreground);
+
+        .open-menu-button {
+            svg {
+                fill: var(--middle-color);
+            }
+        }
     }
 
     &:hover {
@@ -51,10 +64,8 @@
     background-color: var(--foreground);
     margin-right: $spacing-3;
 
-    @media (max-width: $screen-sm) {
-        width: 2.5rem !important;
-        height: 2.5rem !important;
-        margin-right: $spacing-2;
+    @media (max-width: $screen-md) {
+        display: none;
     }
 }
 
@@ -96,12 +107,8 @@
             fill: var(--background);
         }
     }
-}
 
-.avatar,
-.retry-button,
-.remove-button {
-    @media (max-width: $screen-md) {
+    @media (max-width: $screen-lg) {
         display: none;
     }
 }
@@ -113,5 +120,52 @@
     &:focus,
     &:focus-visible {
         opacity: 1;
+    }
+}
+
+.open-menu-button {
+    border: none;
+    padding: $spacing-0-5;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        border: none;
+
+        svg {
+            fill: var(--background);
+        }
+    }
+}
+
+.retry-button-action,
+.remove-button-action {
+    padding: $spacing-0-5;
+    border: none;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        * {
+            color: var(--middle-color);
+            fill: var(--middle-color);
+        }
+    }
+}
+
+.menu-actions {
+    &--active {
+    }
+
+    &--first {
+    }
+
+    &--last {
+    }
+
+    &--admin {
+    }
+
+    &--user {
     }
 }

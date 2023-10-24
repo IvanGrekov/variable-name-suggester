@@ -4,7 +4,7 @@ import API from 'features/suggester-page/api';
 import {
     useSelectAddLoadingSuggesterChatMessage,
     useSelectEditSuggesterChatMessage,
-    useSelectSuggesterChatCounter,
+    useSelectIncreaseChatCounter,
 } from 'features/suggester-page/stores/suggester-chat/selectors';
 import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 import { useAddErrorMessageToNotifications } from 'hooks/notifications.hooks';
@@ -20,7 +20,7 @@ type TUSeSendSuggesterRequest = () => (args: {
 export const useSendSuggesterRequest: TUSeSendSuggesterRequest = () => {
     const addLoadingMessage = useSelectAddLoadingSuggesterChatMessage();
     const editMessage = useSelectEditSuggesterChatMessage();
-    const increaseChatCounter = useSelectSuggesterChatCounter();
+    const increaseChatCounter = useSelectIncreaseChatCounter();
     const addErrorMessageToNotifications = useAddErrorMessageToNotifications();
 
     return async ({ areaValue, messageId, prompt, callback }) => {
