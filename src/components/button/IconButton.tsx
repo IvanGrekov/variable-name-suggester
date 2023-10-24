@@ -15,6 +15,7 @@ function IconButton(
         iconSize,
         variant,
         className,
+        iconWrapperClassName,
         onClick,
     }: IIconButtonProps,
     ref: Ref<HTMLButtonElement>,
@@ -36,7 +37,7 @@ function IconButton(
                 className,
             )}
         >
-            <Icon size={iconSize} />
+            <Icon size={iconSize} wrapperClassName={iconWrapperClassName} />
         </button>
     );
 }

@@ -7,16 +7,18 @@
 
     --light: 238, 238, 238;
     --dark: 34, 40, 49;
-    --middle: 0, 173, 181;
+    --middle: 96, 150, 180;
+    --middle-light: 128, 177, 204;
 
-    --gray: #aaaaaa;
+    --gray: rgb(120, 120, 120);
     --gray-light: #e3e1e1;
     --red: #f45050;
     --green: #47a992;
     --blue: #3a98b9;
 
     --middle-color: rgba(var(--middle));
-    --middle-opacity: rgba(var(--middle), 0.5);
+    --middle-light-color: rgba(var(--middle-light));
+    --middle-opacity-color: rgba(var(--middle), 0.5);
     --hover: rgb(var(--middle));
     --disabled: var(--foreground-invisible);
     --disabled-text: var(--disabled);

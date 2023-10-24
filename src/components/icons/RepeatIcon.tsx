@@ -6,11 +6,8 @@ export default function RepeatIcon({
     className,
     wrapperClassName,
 }: IIconProps): JSX.Element {
-    const formattedSize =
-        (typeof size === 'number' ? size : EIconSizes[size]) * 0.75;
-
     return (
-        <IconWrapper size={formattedSize} className={wrapperClassName}>
+        <IconWrapper size={size} className={wrapperClassName}>
             <svg
                 width="24"
                 height="24"

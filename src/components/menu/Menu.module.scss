@@ -14,23 +14,23 @@
     position: absolute;
     z-index: $zindex-menu;
     top: 90%;
-    right: -73%;
+    right: -50%;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     padding: $default-spacing-xs;
-    width: 9.5rem;
+    width: fit-content;
 
     border-radius: $border-radius-md;
-    background-color: var(--foreground);
-    box-shadow: var(--box-shadow-sm);
+    background-color: var(--gray);
+    box-shadow: var(--box-shadow-md);
     transition: opacity $base-transition-duration, top $base-transition-duration,
         visibility 0s $base-transition-duration;
 
     &--open {
         @include visible-animated-element();
 
-        top: 110%;
+        top: 140%;
     }
 
     &::before {
@@ -38,18 +38,31 @@
         display: block;
         position: absolute;
         top: 0;
-        right: 45%;
+        right: 23%;
         width: 1rem;
         height: 1rem;
         border-radius: $border-radius-xs;
-        background-color: var(--foreground);
+        background-color: var(--gray);
         rotate: 45deg;
         translate: 0 -50%;
     }
 
-    * {
+    button {
         color: var(--background);
-        fill: var(--background);
+
+        svg {
+            fill: var(--background);
+        }
+
+        &:hover,
+        &:focus,
+        &:focus-visible {
+            color: var(--middle-light-color);
+
+            svg {
+                fill: var(--middle-light-color);
+            }
+        }
     }
 }
 

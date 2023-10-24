@@ -31,4 +31,5 @@ export interface IIconButtonProps extends IBaseButtonProps {
     Icon: (props: IIconProps) => JSX.Element;
     variant?: 'primary' | 'overlayed';
     iconSize?: IIconProps['size'];
+    iconWrapperClassName?: string;
 }

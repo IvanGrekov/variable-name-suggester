@@ -21,11 +21,11 @@ export interface IChatMessageProps extends IChatMessage {
 
 export default function ChatMessage({
     id,
-    isError,
-    isLoading,
     userRole,
     text,
     areaValue,
+    isError,
+    isLoading,
     className,
 }: IChatMessageProps): JSX.Element {
     const removeMessage = useSelectRemoveSuggesterChatMessage();
@@ -71,6 +71,7 @@ export default function ChatMessage({
                     iconSize={30}
                     onClick={onRetry}
                     className={styles['retry-button']}
+                    iconWrapperClassName={styles['retry-button__icon-wrapper']}
                 />
             )}
 
@@ -86,6 +87,7 @@ export default function ChatMessage({
 
             <MessageMenu
                 id={id}
+                text={text}
                 isAdmin={isAdmin}
                 isUser={isUser}
                 isLoading={isLoading}

@@ -93,6 +93,9 @@
 
 .retry-button,
 .remove-button {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
     background-color: var(--background-opacity);
     margin-left: $spacing-3;
     padding: $spacing-2;
@@ -110,6 +113,14 @@
 
     @media (max-width: $screen-lg) {
         display: none;
+    }
+}
+
+.retry-button {
+    position: relative;
+
+    &__icon-wrapper {
+        position: absolute;
     }
 }
 
@@ -138,22 +149,29 @@
     }
 }
 
-.retry-button-action,
-.remove-button-action {
+.button-action {
+    height: 2.25rem;
     padding: $spacing-0-5;
     border: none;
+}
 
-    &:hover,
-    &:focus,
-    &:focus-visible {
-        * {
-            color: var(--middle-color);
-            fill: var(--middle-color);
-        }
+.retry-button-action {
+    svg {
+        translate: 0.3rem 0;
+    }
+}
+
+.copy-button-action {
+    svg {
+        translate: 0.2rem 0;
     }
 }
 
 .menu-actions {
+    button {
+        justify-content: space-between;
+    }
+
     &--active {
     }
 
