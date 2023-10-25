@@ -88,7 +88,6 @@ export default function ChatMessage({
             <MessageMenu
                 id={id}
                 text={text}
-                isAdmin={isAdmin}
                 isUser={isUser}
                 isLoading={isLoading}
                 isError={isError}

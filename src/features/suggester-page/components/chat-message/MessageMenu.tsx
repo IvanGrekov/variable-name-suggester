@@ -10,14 +10,13 @@ import Menu from 'components/menu/Menu';
 import styles from 'features/suggester-page/components/chat-message/ChatMessage.module.scss';
 import {
     useShouldAddMessageMenu,
-    useIsFirstMessage,
     useIsLastMessage,
+    useMenuZIndex,
 } from 'features/suggester-page/components/chat-message/hooks';
 
 interface IMessageMenuProps {
     id: string;
     text: string;
-    isAdmin: boolean;
     isUser: boolean;
     isLoading?: boolean;
     isError?: boolean;
@@ -28,7 +27,6 @@ interface IMessageMenuProps {
 export default function MessageMenu({
     id,
     text,
-    isAdmin,
     isUser,
     isLoading,
     isError,
@@ -37,8 +35,9 @@ export default function MessageMenu({
 }: IMessageMenuProps): JSX.Element | null {
     const shouldAddMessageMenu = useShouldAddMessageMenu();
 
-    const isFirstMessage = useIsFirstMessage(id);
     const isLastMessage = useIsLastMessage(id);
+
+    const { menuRef, zIndex } = useMenuZIndex();
 
     if (!shouldAddMessageMenu || isLoading) {
         return null;
@@ -50,6 +49,7 @@ export default function MessageMenu({
 
     return (
         <Menu
+            ref={menuRef}
             OpenMenuElement={
                 <IconButton
                     Icon={MoreIcon}
@@ -59,12 +59,10 @@ export default function MessageMenu({
             }
             hideTooltip={true}
             actionsClassName={cx(styles['menu-actions'], {
-                [styles['menu-actions--first']]: isFirstMessage,
                 [styles['menu-actions--last']]: isLastMessage,
-                [styles['menu-actions--admin']]: isAdmin,
                 [styles['menu-actions--user']]: isUser,
             })}
-            actionsActiveClassName={styles['menu-actions--active']}
+            style={{ zIndex }}
         >
             {isError ? (
                 <Button

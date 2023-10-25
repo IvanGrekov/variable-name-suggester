@@ -1,3 +1,5 @@
+import { useState, useRef, useEffect, RefObject } from 'react';
+
 import { SCREEN_SIZES_WITH_MESSAGE_MENU } from 'features/suggester-page/components/chat-message/constants';
 import { getLastUserCharMessage } from 'features/suggester-page/components/chat-message/utils';
 import { useSendSuggesterRequest } from 'features/suggester-page/hooks/suggesterApi.hooks';
@@ -42,14 +44,30 @@ export const useShouldAddMessageMenu = (): boolean => {
     return SCREEN_SIZES_WITH_MESSAGE_MENU.includes(windowSize);
 };
 
-export const useIsFirstMessage = (id: string): boolean => {
-    const chat = useSelectSuggesterChat();
-
-    return chat.at(0)?.id === id;
-};
-
 export const useIsLastMessage = (id: string): boolean => {
     const chat = useSelectSuggesterChat();
 
     return chat.at(-1)?.id === id;
+};
+
+export const useMenuZIndex = (): {
+    menuRef: RefObject<HTMLDivElement>;
+    zIndex: number;
+} => {
+    const menuRef = useRef<HTMLDivElement>(null);
+    const [zIndex, setZIndex] = useState(1199);
+
+    useEffect(() => {
+        const allMenuElements = document.querySelectorAll(
+            '[class*="Menu_menu"]',
+        );
+        const index = Array.from(allMenuElements).indexOf(menuRef.current!);
+
+        setZIndex((prev) => prev - index);
+    }, []);
+
+    return {
+        menuRef,
+        zIndex,
+    };
 };

@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, CSSProperties } from 'react';
 
 import { IButtonProps } from 'components/button/types';
 import { IDividerProps } from 'components/divider/types';
@@ -22,4 +22,5 @@ export interface IMenuProps {
     tooltipClassName?: string;
     actionsClassName?: string;
     actionsActiveClassName?: string;
+    style?: CSSProperties;
 }

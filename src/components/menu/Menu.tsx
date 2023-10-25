@@ -1,3 +1,5 @@
+import { forwardRef, Ref } from 'react';
+
 import FocusTrap from 'focus-trap-react';
 
 import IconButton from 'components/button/IconButton';
@@ -9,15 +11,19 @@ import { IMenuProps } from 'components/menu/types';
 import Tooltip from 'components/tooltip/Tooltip';
 import { useBodyScrollLock } from 'hooks/scroll.hooks';
 
-export default function Menu({
-    children,
-    OpenMenuElement,
-    hideTooltip,
-    tooltipPosition,
-    tooltipClassName,
-    actionsClassName,
-    actionsActiveClassName,
-}: IMenuProps): JSX.Element {
+function Menu(
+    {
+        children,
+        OpenMenuElement,
+        hideTooltip,
+        tooltipPosition,
+        tooltipClassName,
+        actionsClassName,
+        actionsActiveClassName,
+        style,
+    }: IMenuProps,
+    ref: Ref<HTMLDivElement>,
+): JSX.Element {
     const { isOpen, onDeactivate, onClick, OpenMenuElementWithOnClick } =
         useMenu(OpenMenuElement);
 
@@ -31,7 +37,12 @@ export default function Menu({
                 onDeactivate,
             }}
         >
-            <div className={styles.menu} onClick={onDeactivate}>
+            <div
+                ref={ref}
+                className={styles.menu}
+                style={style}
+                onClick={onDeactivate}
+            >
                 {hideTooltip ? (
                     <>
                         {OpenMenuElementWithOnClick || (
@@ -69,5 +80,7 @@ export default function Menu({
         </FocusTrap>
     );
 }
+
+export default forwardRef(Menu);
 
 export { default as MenuActionItem } from 'components/menu/MenuActionItem';
