@@ -7,8 +7,66 @@ import {
     useSelectIncreaseChatCounter,
 } from 'features/suggester-page/stores/suggester-chat/selectors';
 import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
+import {
+    getContentMatchesFromChunkValue,
+    prettifyResponseText,
+} from 'features/suggester-page/utils/suggesterApi.utils';
 import { useAddErrorMessageToNotifications } from 'hooks/notifications.hooks';
 import { EUserRole } from 'types/user.types';
+
+type TUseHandleSuggesterResponse = () => (args: {
+    reader: ReadableStreamDefaultReader<Uint8Array>;
+    messageId: string;
+}) => void;
+
+const useHandleSuggesterResponse: TUseHandleSuggesterResponse = () => {
+    const editMessage = useSelectEditSuggesterChatMessage();
+
+    return async ({ reader, messageId }) => {
+        let result = '';
+        let isReaderDone = false;
+
+        while (!isReaderDone) {
+            const chunk = await reader.read();
+            const { value, done } = chunk;
+
+            isReaderDone = done;
+
+            if (!value) {
+                editMessage({
+                    id: messageId,
+                    text: result,
+                    isLoading: false,
+                });
+
+                return;
+            }
+
+            const contentMatches = getContentMatchesFromChunkValue(value);
+            for (const [, text] of contentMatches) {
+                result += prettifyResponseText(text);
+
+                editMessage({
+                    id: messageId,
+                    text: result,
+                });
+            }
+        }
+    };
+};
+
+const useGetAddErrorMessage = (): ((messageId: string) => void) => {
+    const editMessage = useSelectEditSuggesterChatMessage();
+
+    return (messageId: string) => {
+        editMessage({
+            id: messageId,
+            text: '',
+            isLoading: false,
+            isError: true,
+        });
+    };
+};
 
 type TUSeSendSuggesterRequest = () => (args: {
     areaValue: TAreaFieldValue;
@@ -22,6 +80,9 @@ export const useSendSuggesterRequest: TUSeSendSuggesterRequest = () => {
     const editMessage = useSelectEditSuggesterChatMessage();
     const increaseChatCounter = useSelectIncreaseChatCounter();
     const addErrorMessageToNotifications = useAddErrorMessageToNotifications();
+
+    const addErrorMessage = useGetAddErrorMessage();
+    const handleSuggesterResponse = useHandleSuggesterResponse();
 
     return async ({ areaValue, messageId, prompt, callback }) => {
         callback?.();
@@ -45,31 +106,30 @@ export const useSendSuggesterRequest: TUSeSendSuggesterRequest = () => {
         }
 
         try {
-            const { data, status } = await API.post('', {
+            const response = await API({
                 areaValue,
                 prompt,
             });
 
-            if (status === 200) {
-                editMessage({
-                    id: adminMessageId,
-                    text: data.message.content,
-                    isLoading: false,
-                });
-            } else {
-                editMessage({
-                    id: adminMessageId,
-                    text: '',
-                    isLoading: false,
-                    isError: true,
-                });
+            const { ok, body } = response;
+            const reader = body?.getReader();
+
+            if (!ok || !reader) {
+                addErrorMessage(adminMessageId);
+
+                return;
             }
 
+            handleSuggesterResponse({
+                reader,
+                messageId: adminMessageId,
+            });
             increaseChatCounter();
         } catch (error) {
             addErrorMessageToNotifications({
                 message: error.message,
             });
+            addErrorMessage(adminMessageId);
         }
     };
 };

@@ -23,7 +23,7 @@ export default function Chat({ areaValue }: IChatProps): JSX.Element {
 
     const chat = useSelectSuggesterChat();
 
-    useBottomChatScroll(listRef);
+    const scrollToListBottom = useBottomChatScroll(listRef);
 
     const responseModalProps = useResponseModal();
 
@@ -43,6 +43,7 @@ export default function Chat({ areaValue }: IChatProps): JSX.Element {
                                 key={id}
                                 {...message}
                                 areaValue={areaValue}
+                                scrollToListBottom={scrollToListBottom}
                                 className={cx(styles.message, {
                                     [styles['message--removing']]: isRemoving,
                                     [styles['message--loading']]: isLoading,

@@ -1,11 +1,22 @@
-import axios from 'axios';
+import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 
-const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME || 'http://localhost';
-const SERVER_PORT = process.env.NEXT_PUBLIC_SERVER_PORT || 3001;
-const SERVER_URL = `${SERVER_NAME}:${SERVER_PORT}`;
+interface IApiArgs {
+    areaValue: TAreaFieldValue;
+    prompt: string;
+}
 
-const API = axios.create({
-    baseURL: `${SERVER_URL}/api`,
-});
-
-export default API;
+export default async function API({
+    areaValue,
+    prompt,
+}: IApiArgs): Promise<Response> {
+    return await fetch('/api', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            areaValue,
+            prompt,
+        }),
+    });
+}

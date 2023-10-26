@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import cx from 'classnames';
 
 import IconButton from 'components/button/IconButton';
@@ -17,6 +19,7 @@ import { getIsAdmin, getIsUser } from 'utils/userRole.utils';
 export interface IChatMessageProps extends IChatMessage {
     areaValue: TAreaFieldValue;
     className?: string;
+    scrollToListBottom: VoidFunction;
 }
 
 export default function ChatMessage({
@@ -27,10 +30,15 @@ export default function ChatMessage({
     isError,
     isLoading,
     className,
+    scrollToListBottom,
 }: IChatMessageProps): JSX.Element {
     const removeMessage = useSelectRemoveSuggesterChatMessage();
     const onRetry = useOnRetry({ id, areaValue });
     const onRemove = (): void => removeMessage(id);
+
+    useEffect(() => {
+        scrollToListBottom();
+    }, [text, scrollToListBottom]);
 
     const isAdmin = getIsAdmin(userRole);
     const isUser = getIsUser(userRole);
@@ -51,7 +59,7 @@ export default function ChatMessage({
         >
             {isAdmin && <AiAvatar className={styles['avatar']} />}
 
-            {isLoading ? (
+            {isLoading && !text ? (
                 <Skeleton height={24} className={styles['text-skeleton']} />
             ) : (
                 <Typography

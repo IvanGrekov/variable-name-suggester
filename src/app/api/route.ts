@@ -11,7 +11,10 @@ export async function POST(request: NextRequest): Promise<Response> {
     const body = await request.json();
     const { areaValue, prompt } = body;
 
-    const completion = await openAi.chat.completions.create({
+    const chatCompletionStream = await openAi.chat.completions.create({
+        model: 'gpt-3.5-turbo',
+        stream: true,
+        temperature: 0.78,
         messages: [
             {
                 role: 'system',
@@ -22,10 +25,8 @@ export async function POST(request: NextRequest): Promise<Response> {
                 content: getUserMessage(prompt),
             },
         ],
-        model: 'gpt-3.5-turbo',
-        temperature: 0.79,
     });
-    const answer = completion.choices[0];
+    const readableStream = chatCompletionStream.toReadableStream();
 
-    return Response.json(answer, { status: 200 });
+    return new Response(readableStream);
 }

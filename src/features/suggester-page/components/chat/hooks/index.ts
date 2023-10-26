@@ -12,7 +12,7 @@ import { EUserRole } from 'types/user.types';
 
 export const useBottomChatScroll = (
     listRef: RefObject<HTMLDivElement>,
-): void => {
+): VoidFunction => {
     const chat = useSelectSuggesterChat();
     const currentLength = useRef(chat.length);
 
@@ -29,6 +29,8 @@ export const useBottomChatScroll = (
 
         currentLength.current = chat.length;
     }, [listRef, chat]);
+
+    return () => scrollToListBottom(listRef);
 };
 
 const useGetIsLastMessageFromUser = (): boolean => {
