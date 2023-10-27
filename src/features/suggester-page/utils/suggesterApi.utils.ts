@@ -12,5 +12,5 @@ export const getContentMatchesFromChunkValue: TGetContentMatchesFromChunkValue =
     };
 
 export const prettifyResponseText = (text: string): string => {
-    return text.replaceAll('\\n', '<br />').replaceAll('\\', '"');
+    return text.replaceAll('\\n', '<br />').replaceAll('\\', '<br />');
 };

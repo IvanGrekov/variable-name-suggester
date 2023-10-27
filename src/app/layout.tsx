@@ -12,7 +12,6 @@ import ErrorBoundary from 'components/error-boundary/ErrorBoundary';
 import Header from 'components/header/Header';
 import NetworkStatusIndicator from 'components/network-status-indicator/NetworkStatusIndicator';
 import Notifications from 'components/notifications/Notifications';
-import ScrollTopButton from 'components/scroll-top-button/ScrollTopButton';
 import Spacing from 'components/spacing/Spacing';
 import Typography from 'components/typography/Typography';
 import AppTabs from 'features/app-tabs/components/app-tabs/AppTabs';
@@ -62,8 +61,6 @@ export default function RootLayout({
                         <Notifications />
 
                         <NetworkStatusIndicator />
-
-                        <ScrollTopButton />
                     </Providers>
 
                     <div id="modal-root" />
