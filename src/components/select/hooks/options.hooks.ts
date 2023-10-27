@@ -80,14 +80,16 @@ export const useFilteredOptions = <T>({
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        if (!isOpen) {
-            // Need because of animation
-            const timeoutId = setTimeout(() => {
-                setSearch('');
-            }, 200);
-
-            return (): void => clearTimeout(timeoutId);
+        if (isOpen) {
+            return;
         }
+
+        // Need because of animation
+        const timeoutId = setTimeout(() => {
+            setSearch('');
+        }, 200);
+
+        return (): void => clearTimeout(timeoutId);
     }, [isOpen]);
 
     const filteredOptions = useMemo(() => {
