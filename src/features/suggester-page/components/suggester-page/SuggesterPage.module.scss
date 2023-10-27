@@ -8,13 +8,16 @@
 
 .empty-state {
     position: absolute;
-    z-index: $zindex-menu;
     width: 45%;
     min-width: 18.75rem;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: var(--box-shadow-md);
+
+    &--access-expired {
+        z-index: $zindex-menu;
+    }
 }
 
 .get-full-button {

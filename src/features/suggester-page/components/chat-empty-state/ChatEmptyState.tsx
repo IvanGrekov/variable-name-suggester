@@ -4,7 +4,7 @@ import Typography from 'components/typography/Typography';
 import styles from 'features/suggester-page/components/chat-empty-state/ChatEmptyState.module.scss';
 import { TAreaFieldValue } from 'features/suggester-page/types/areaField.types';
 
-interface ISuggesterChatEmptyStateProps {
+interface IChatEmptyStateProps {
     areaValue?: TAreaFieldValue;
     customTitle?: string;
     customDescription?: string;
@@ -12,13 +12,13 @@ interface ISuggesterChatEmptyStateProps {
     className?: string;
 }
 
-export default function SuggesterChatEmptyState({
+export default function ChatEmptyState({
     areaValue,
     customTitle,
     customDescription,
     action,
     className,
-}: ISuggesterChatEmptyStateProps): JSX.Element {
+}: IChatEmptyStateProps): JSX.Element {
     const defaultDescription = areaValue?.length
         ? 'Ask away to get personalized suggestions!'
         : 'Please select at least one area of interest!';

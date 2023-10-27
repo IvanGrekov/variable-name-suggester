@@ -52,7 +52,9 @@ export default function SuggesterPage({
                             onClick={openModal}
                         />
                     }
-                    className={styles['empty-state']}
+                    className={cx(styles['empty-state'], {
+                        [styles['empty-state--access-expired']]: true,
+                    })}
                 />
             )}
 
